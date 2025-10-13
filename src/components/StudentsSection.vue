@@ -4,10 +4,10 @@
       <!-- Cabeçalho da seção -->
       <div class="section-header animate-on-scroll">
         <h2 class="section-title">
-          <span class="text-gradient">Alunos</span> Hoje e Amanhã
+          <span class="text-gradient">Professores</span> Hoje e Amanhã
         </h2>
         <p class="section-subtitle">
-          Conheça nossos estudantes e suas visões de futuro
+          Conheça nossos educadores e suas turmas
         </p>
       </div>
       

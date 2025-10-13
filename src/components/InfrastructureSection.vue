@@ -49,29 +49,45 @@
             <h3 class="card-title">{{ item.title }}</h3>
             <p class="card-description">{{ item.description }}</p>
             
-            <!-- Características -->
-            <div class="card-features">
-              <div 
-                v-for="feature in item.features" 
-                :key="feature"
-                class="feature-item"
-              >
-                <span class="feature-icon">✓</span>
-                <span class="feature-text">{{ feature }}</span>
-              </div>
-            </div>
-            
-            <!-- Tecnologias -->
-            <div class="card-technologies">
-              <h4>Tecnologias:</h4>
-              <div class="tech-tags">
-                <span 
-                  v-for="tech in item.technologies" 
-                  :key="tech"
-                  class="tech-tag"
+            <!-- Acordeão de características -->
+            <div class="card-accordion">
+              <div class="accordion-item">
+                <button 
+                  class="accordion-header"
+                  @click="toggleAccordion(index)"
+                  :class="{ 'active': activeAccordion === index }"
                 >
-                  {{ tech }}
-                </span>
+                  <span class="accordion-title">Características</span>
+                  <span class="accordion-icon">{{ activeAccordion === index ? '−' : '+' }}</span>
+                </button>
+                <div 
+                  class="accordion-content"
+                  :class="{ 'active': activeAccordion === index }"
+                >
+                  <div class="card-features">
+                    <div 
+                      v-for="feature in item.features" 
+                      :key="feature"
+                      class="feature-item"
+                    >
+                      <span class="feature-icon">✓</span>
+                      <span class="feature-text">{{ feature }}</span>
+                    </div>
+                  </div>
+                  
+                  <div class="card-technologies">
+                    <h4>Tecnologias:</h4>
+                    <div class="tech-tags">
+                      <span 
+                        v-for="tech in item.technologies" 
+                        :key="tech"
+                        class="tech-tag"
+                      >
+                        {{ tech }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             
@@ -174,6 +190,7 @@ export default {
     return {
       activeCard: null,
       activePhase: 0,
+      activeAccordion: null,
       selectedInfrastructure: null,
       infrastructureItems: [
         {
@@ -330,6 +347,10 @@ export default {
     
     setActivePhase(index) {
       this.activePhase = index
+    },
+    
+    toggleAccordion(index) {
+      this.activeAccordion = this.activeAccordion === index ? null : index
     },
     
     showInfrastructureDetails(item) {
@@ -504,6 +525,63 @@ export default {
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 20px;
+}
+
+/* Acordeão */
+.card-accordion {
+  margin-bottom: 20px;
+}
+
+.accordion-item {
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.accordion-header {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  padding: 15px 20px;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition-smooth);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.accordion-header:hover {
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.accordion-header.active {
+  background: rgba(0, 212, 255, 0.15);
+  color: var(--primary-blue);
+}
+
+.accordion-title {
+  font-weight: 600;
+}
+
+.accordion-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: var(--transition-smooth);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.accordion-content.active {
+  max-height: 500px;
+  padding: 20px;
 }
 
 .card-features {

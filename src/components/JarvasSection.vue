@@ -4,7 +4,7 @@
       <!-- Cabeçalho da seção -->
       <div class="section-header animate-on-scroll">
         <h2 class="section-title">
-          <span class="text-gradient">Jarvas Cíntia</span>
+          <span class="text-gradient">Cíntia IA</span>
         </h2>
         <p class="section-subtitle">
           A Inteligência Artificial da Escola Seron
@@ -57,7 +57,7 @@
         <div class="chat-interface animate-on-scroll">
           <div class="chat-header">
             <div class="chat-title">
-              <h3>Jarvas Cíntia</h3>
+              <h3>Cíntia IA</h3>
               <span class="status-indicator">
                 <span class="status-dot"></span>
                 Online
@@ -73,7 +73,7 @@
               </div>
               <div class="message-content">
                 <p>
-                  Olá! Sou Cíntia, a IA Jarvas da Seron. Estou aqui para te guiar na escola do futuro. 
+                  Olá! Sou Cíntia, a IA da Escola Seron. Estou aqui para te guiar na escola do futuro. 
                   Como posso ajudá-lo hoje?
                 </p>
                 <span class="message-time">{{ getCurrentTime() }}</span>

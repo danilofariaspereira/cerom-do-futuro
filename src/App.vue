@@ -9,8 +9,8 @@
     <!-- Jarvas Cíntia - IA da Escola -->
     <JarvasSection />
     
-    <!-- Alunos Hoje e Amanhã -->
-    <StudentsSection />
+    <!-- Professores Hoje e Amanhã -->
+    <TeachersSection />
     
     <!-- Infraestrutura Futurista -->
     <InfrastructureSection />
@@ -43,7 +43,7 @@
 import HeroSection from './components/HeroSection.vue'
 import ComparisonSection from './components/ComparisonSection.vue'
 import JarvasSection from './components/JarvasSection.vue'
-import StudentsSection from './components/StudentsSection.vue'
+import TeachersSection from './components/TeachersSection.vue'
 import InfrastructureSection from './components/InfrastructureSection.vue'
 import QRCodeSection from './components/QRCodeSection.vue'
 import ContactSection from './components/ContactSection.vue'
@@ -54,7 +54,7 @@ export default {
     HeroSection,
     ComparisonSection,
     JarvasSection,
-    StudentsSection,
+    TeachersSection,
     InfrastructureSection,
     QRCodeSection,
     ContactSection

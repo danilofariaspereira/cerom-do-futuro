@@ -52,17 +52,6 @@
             <h3 class="comparison-title">{{ item.title }}</h3>
             <p class="comparison-description">{{ item.description }}</p>
             
-            <!-- Características -->
-            <div class="comparison-features">
-              <div class="feature-item">
-                <span class="feature-label">Hoje:</span>
-                <span class="feature-text">{{ item.currentFeatures }}</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-label">Futuro:</span>
-                <span class="feature-text">{{ item.futureFeatures }}</span>
-              </div>
-            </div>
             
             <!-- Botão de ação -->
             <button 
@@ -93,14 +82,17 @@
               <div class="modal-image-group">
                 <h4>Hoje</h4>
                 <img :src="selectedItem.currentImage" :alt="`${selectedItem.title} - Atual`">
+                <p class="image-description">{{ selectedItem.currentFeatures }}</p>
               </div>
               <div class="modal-image-group">
                 <h4>Futuro</h4>
                 <img :src="selectedItem.futureImage" :alt="`${selectedItem.title} - Futuro`">
+                <p class="image-description">{{ selectedItem.futureFeatures }}</p>
               </div>
             </div>
             
             <div class="modal-description">
+              <h4>Descrição Detalhada</h4>
               <p>{{ selectedItem.detailedDescription }}</p>
             </div>
           </div>
@@ -211,15 +203,15 @@ export default {
 
 .comparison-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
   margin-bottom: 60px;
 }
 
 .comparison-item {
   background: var(--card-bg);
-  border-radius: 20px;
-  padding: 30px;
+  border-radius: 15px;
+  padding: 20px;
   border: 1px solid rgba(0, 212, 255, 0.2);
   transition: var(--transition-smooth);
   backdrop-filter: blur(10px);
@@ -428,6 +420,18 @@ export default {
   object-fit: cover;
   border-radius: 10px;
   border: 2px solid rgba(0, 212, 255, 0.3);
+  margin-bottom: 10px;
+}
+
+.image-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-align: center;
+  font-style: italic;
+  padding: 10px;
+  background: rgba(0, 212, 255, 0.1);
+  border-radius: 8px;
+  border-left: 3px solid var(--primary-blue);
 }
 
 .modal-description {

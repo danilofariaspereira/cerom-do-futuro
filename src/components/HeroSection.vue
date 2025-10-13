@@ -90,8 +90,8 @@
     
     <!-- Indicador de scroll -->
     <div class="scroll-indicator" @click="scrollToNextSection">
-      <div class="scroll-arrow"></div>
-      <span>Role para baixo</span>
+      <div class="scroll-arrow">↓</div>
+      <span>Hoje vs Futuro</span>
     </div>
   </section>
 </template>
@@ -395,13 +395,11 @@ export default {
 }
 
 .scroll-arrow {
-  width: 20px;
-  height: 20px;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  transform: rotate(45deg);
+  font-size: 2rem;
+  font-weight: bold;
   margin: 0 auto 10px;
   animation: float 2s ease-in-out infinite;
+  color: var(--primary-blue);
 }
 
 .scroll-indicator span {
