@@ -63,6 +63,7 @@
                 <div 
                   class="accordion-content"
                   :class="{ 'active': activeAccordion === index }"
+                  :style="{ display: activeAccordion === index ? 'block' : 'none' }"
                 >
                   <div class="card-features">
                     <div 
@@ -573,15 +574,15 @@ export default {
 }
 
 .accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
+  display: none;
   background: rgba(255, 255, 255, 0.02);
+  transition: opacity 0.3s ease-out;
 }
 
 .accordion-content.active {
-  max-height: 500px;
+  display: block;
   padding: 20px;
+  opacity: 1;
 }
 
 .card-features {
