@@ -883,7 +883,19 @@ export default {
 @media (max-width: 768px) {
   .infrastructure-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
+  }
+  
+  .infrastructure-card {
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-size: 1.3rem;
+  }
+  
+  .card-description {
+    font-size: 0.9rem;
   }
   
   .timeline-container::before {
@@ -906,15 +918,59 @@ export default {
   .resources-grid {
     grid-template-columns: 1fr;
   }
+  
+  .accordion-header {
+    padding: 12px 15px;
+    font-size: 0.85rem;
+  }
+  
+  .accordion-content.active {
+    padding: 15px;
+  }
 }
 
 @media (max-width: 480px) {
+  .infrastructure-grid {
+    gap: 20px;
+  }
+  
+  .infrastructure-card {
+    padding: 15px;
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+  }
+  
+  .card-description {
+    font-size: 0.85rem;
+  }
+  
   .phase-content {
     margin-left: 30px;
   }
   
   .modal-content {
-    padding: 20px;
+    padding: 15px;
+    margin: 10px;
+  }
+  
+  .accordion-header {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .accordion-content.active {
+    padding: 12px;
+  }
+  
+  .feature-item {
+    font-size: 0.8rem;
+  }
+  
+  .tech-tag {
+    font-size: 0.7rem;
+    padding: 4px 8px;
   }
 }
 </style>

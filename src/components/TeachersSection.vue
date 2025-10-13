@@ -639,11 +639,41 @@ export default {
 @media (max-width: 768px) {
   .teachers-grid {
     grid-template-columns: 1fr;
-    gap: 25px;
+    gap: 20px;
+  }
+  
+  .teacher-card {
+    padding: 20px;
+  }
+  
+  .teacher-name {
+    font-size: 1.1rem;
+  }
+  
+  .teacher-subject {
+    font-size: 0.85rem;
+  }
+  
+  .teacher-grades {
+    font-size: 0.75rem;
+  }
+  
+  .teacher-testimonial blockquote {
+    font-size: 0.8rem;
+    padding: 8px;
   }
   
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .stat-item {
+    padding: 20px;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
   }
   
   .modal-header {
@@ -658,12 +688,70 @@ export default {
 }
 
 @media (max-width: 480px) {
+  .teachers-grid {
+    gap: 15px;
+  }
+  
+  .teacher-card {
+    padding: 15px;
+  }
+  
+  .teacher-icon-container {
+    height: 60px;
+    margin-bottom: 15px;
+  }
+  
+  .teacher-icon {
+    font-size: 2.5rem;
+  }
+  
+  .teacher-name {
+    font-size: 1rem;
+  }
+  
+  .teacher-subject {
+    font-size: 0.8rem;
+  }
+  
+  .teacher-grades {
+    font-size: 0.7rem;
+  }
+  
+  .teacher-testimonial blockquote {
+    font-size: 0.75rem;
+    padding: 6px;
+  }
+  
   .stats-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .stat-item {
+    padding: 15px;
   }
   
   .stat-number {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem;
+  }
+  
+  .modal-content {
+    padding: 15px;
+    margin: 10px;
+  }
+  
+  .teacher-icon-large {
+    font-size: 3rem;
+    width: 60px;
+    height: 60px;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
   }
 }
 </style>

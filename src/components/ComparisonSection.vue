@@ -444,11 +444,19 @@ export default {
 @media (max-width: 768px) {
   .comparison-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
   }
   
   .comparison-item {
     padding: 20px;
+  }
+  
+  .comparison-title {
+    font-size: 1.3rem;
+  }
+  
+  .comparison-description {
+    font-size: 0.9rem;
   }
   
   .comparison-image-container {
@@ -457,31 +465,64 @@ export default {
   
   .modal-images {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
   
-  .feature-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
+  .modal-image-group img {
+    height: 150px;
   }
   
-  .feature-text {
-    text-align: left;
-    margin-left: 0;
+  .image-description {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+  
+  .modal-description {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
+  .comparison-grid {
+    gap: 20px;
+  }
+  
   .comparison-item {
     padding: 15px;
   }
   
+  .comparison-title {
+    font-size: 1.2rem;
+  }
+  
+  .comparison-description {
+    font-size: 0.85rem;
+  }
+  
+  .comparison-image-container {
+    height: 150px;
+  }
+  
   .modal-content {
-    padding: 20px;
+    padding: 15px;
+    margin: 10px;
   }
   
   .modal-title {
     font-size: 1.5rem;
+  }
+  
+  .modal-image-group img {
+    height: 120px;
+  }
+  
+  .image-description {
+    font-size: 0.75rem;
+    padding: 6px;
+  }
+  
+  .modal-description {
+    font-size: 0.9rem;
   }
 }
 </style>
