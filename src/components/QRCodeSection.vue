@@ -7,7 +7,7 @@
           <span class="text-gradient">QR Code</span> Dinâmico
         </h2>
         <p class="section-subtitle">
-          Acesso rápido e compartilhamento fácil do Seron do Futuro
+          Acesso rápido e compartilhamento fácil do Cerom do Futuro
         </p>
       </div>
       
@@ -29,7 +29,7 @@
               <div class="overlay-content">
                 <div class="overlay-icon">📱</div>
                 <h3 class="overlay-title">Escaneie para Acessar</h3>
-                <p class="overlay-subtitle">Seron do Futuro</p>
+                <p class="overlay-subtitle">Cerom do Futuro</p>
               </div>
             </div>
             
@@ -96,7 +96,7 @@
                 v-model="qrUrl"
                 @input="generateQRCode"
                 class="control-input"
-                placeholder="https://serondo-futuro.com"
+                placeholder="https://cerom-do-futuro.com"
               >
             </div>
             
@@ -214,7 +214,7 @@ export default {
   data() {
     return {
       qrSize: 300,
-      qrUrl: 'https://serondo-futuro.com',
+      qrUrl: 'https://cerom-do-futuro.com',
       errorLevel: 'M',
       qrVersion: 1,
       isGenerating: false

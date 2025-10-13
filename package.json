@@ -1,7 +1,7 @@
 {
-  "name": "seron-do-futuro",
+  "name": "cerom-do-futuro",
   "version": "1.0.0",
-  "description": "Site interativo da Escola Seron mostrando sua visão de futuro",
+  "description": "Site interativo da Escola Cerom mostrando sua visão de futuro",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,15 +11,15 @@
     "test:coverage": "vitest --coverage"
   },
   "dependencies": {
-    "vue": "^3.4.0",
-    "qrcode": "^1.5.3"
+    "qrcode": "^1.5.4",
+    "vue": "^3.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
-    "vite": "^5.0.0",
-    "vitest": "^1.0.0",
     "@vue/test-utils": "^2.4.0",
-    "jsdom": "^23.0.0"
+    "jsdom": "^23.0.0",
+    "vite": "^5.0.0",
+    "vitest": "^1.0.0"
   },
   "keywords": [
     "vue",

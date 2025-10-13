@@ -41,7 +41,7 @@
           
           <!-- Título principal -->
           <h1 class="hero-title">
-            <span class="title-line">Seron</span>
+            <span class="title-line">Cerom</span>
             <span class="title-line text-gradient">do Futuro</span>
           </h1>
           

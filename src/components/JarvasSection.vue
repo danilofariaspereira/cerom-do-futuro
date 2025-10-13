@@ -7,7 +7,7 @@
           <span class="text-gradient">Cíntia IA</span>
         </h2>
         <p class="section-subtitle">
-          A Inteligência Artificial da Escola Seron
+          A Inteligência Artificial da Escola Cerom
         </p>
       </div>
       
@@ -73,7 +73,7 @@
               </div>
               <div class="message-content">
                 <p>
-                  Olá! Sou Cíntia, a IA da Escola Seron. Estou aqui para te guiar na escola do futuro. 
+                  Olá! Sou Cíntia, a IA da Escola Cerom. Estou aqui para te guiar na escola do futuro. 
                   Como posso ajudá-lo hoje?
                 </p>
                 <span class="message-time">{{ getCurrentTime() }}</span>

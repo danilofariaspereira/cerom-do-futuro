@@ -1,6 +1,6 @@
-# 🚀 Seron do Futuro
+# 🚀 Cerom do Futuro
 
-> **Site interativo da Escola Seron mostrando sua visão de futuro**
+> **Site interativo da Escola Cerom mostrando sua visão de futuro**
 
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=flat&logo=vue.js)](https://vuejs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat&logo=vite)](https://vitejs.dev/)
