@@ -29,7 +29,7 @@ O **Seron do Futuro** é um site interativo desenvolvido para a Escola Seron em 
 ### Instalação
 ```bash
 # Clone o repositório
-git clone https://github.com/escola-seron/seron-do-futuro.git
+git clone https://github.com/SEU_USUARIO/seron-do-futuro.git
 
 # Instale as dependências
 npm install
@@ -37,6 +37,8 @@ npm install
 # Execute em modo desenvolvimento
 npm run dev
 ```
+
+> **📋 Instruções completas**: Veja o arquivo `GITHUB_SETUP.md` para criar o repositório no GitHub
 
 O projeto estará disponível em `http://localhost:3000`
 
