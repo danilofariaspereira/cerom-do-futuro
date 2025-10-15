@@ -167,9 +167,9 @@ export default {
       window.addEventListener('resize', resize)
       this._particleResize = resize
 
-      // create particles proportional to area
-      const area = (canvas.clientWidth * canvas.clientHeight) / 1000
-      const count = Math.max(20, Math.floor(area))
+      // create a reasonable number of particles proportional to area (denser network look)
+      const areaPx = canvas.clientWidth * canvas.clientHeight
+      const count = Math.max(60, Math.floor(areaPx / 8000))
 
       for (let i = 0; i < count; i++) {
         this._particles.push(this._createParticle(canvas))
@@ -247,14 +247,18 @@ export default {
           }
         }
 
-        // draw
+        // draw (small glowing node)
+        ctx.save()
         ctx.beginPath()
-        ctx.fillStyle = `hsla(${p.hue}, 80%, 60%, 0.95)`
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(180,220,255,0.95)`
+        ctx.shadowColor = `rgba(120,200,255,0.15)`
+        ctx.shadowBlur = 8
+        ctx.arc(p.x, p.y, p.r + 0.6, 0, Math.PI * 2)
         ctx.fill()
+        ctx.restore()
       }
-
-      // connect lines
+      // connect lines (network look)
+      const maxDist = 160
       for (let i = 0; i < this._particles.length; i++) {
         for (let j = i + 1; j < this._particles.length; j++) {
           const a = this._particles[i]
@@ -262,11 +266,11 @@ export default {
           const dx = a.x - b.x
           const dy = a.y - b.y
           const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < 120) {
-            const alpha = 1 - dist / 120
+          if (dist < maxDist) {
+            const alpha = 1 - dist / maxDist
             ctx.beginPath()
-            ctx.strokeStyle = `rgba(170,220,255,${alpha * 0.6})`
-            ctx.lineWidth = 0.8
+            ctx.strokeStyle = `rgba(140,200,255,${alpha * 0.9})`
+            ctx.lineWidth = 1
             ctx.moveTo(a.x, a.y)
             ctx.lineTo(b.x, b.y)
             ctx.stroke()
@@ -362,13 +366,13 @@ export default {
 /* Painel de vidro (frosted glass) ao redor do conteúdo textual */
 .hero-text-panel {
   display: inline-block;
-  padding: 28px 36px 36px 36px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 10px 40px rgba(8,10,20,0.6);
-  backdrop-filter: blur(8px) saturate(120%);
-  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  padding: 34px 46px 46px 46px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(20,30,40,0.45), rgba(10,18,28,0.28));
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 14px 60px rgba(2,6,12,0.7);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
   z-index: 3;
 }
 
@@ -396,11 +400,18 @@ export default {
   line-height: 1.1;
 }
 
-/* Forçar o título principal em branco para maior destaque */
+/* Título principal em branco; segunda linha com gradiente */
 .hero-title,
-.title-line,
-.title-line.text-gradient {
+.title-line {
   color: #ffffff;
+}
+
+.title-line.text-gradient {
+  background: linear-gradient(90deg, #cfefff 0%, #4fc3f7 45%, #6b7bff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  text-shadow: 0 6px 24px rgba(50,70,90,0.2);
 }
 
 .title-line {
@@ -482,10 +493,15 @@ export default {
 }
 
 .btn-explore {
-  font-size: 1.1rem;
-  padding: 15px 30px;
+  font-size: 1.05rem;
+  padding: 14px 34px;
   position: relative;
   overflow: hidden;
+  border-radius: 28px;
+  background: linear-gradient(90deg, #36d1dc 0%, #5b4bff 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 8px 20px rgba(90,120,255,0.18);
 }
 
 .btn-secondary {
