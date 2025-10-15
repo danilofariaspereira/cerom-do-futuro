@@ -28,16 +28,6 @@
     <div class="hero-content">
       <div class="container">
         <div class="hero-text animate-on-scroll">
-          <!-- Logo da Escola Seron -->
-          <div class="logo-container">
-            <img 
-              src="/images/logo-seron.png" 
-              alt="Logo Escola Seron"
-              class="school-logo"
-              @error="onLogoError"
-            >
-            <div class="logo-glow"></div>
-          </div>
           
           <!-- Título principal -->
           <h1 class="hero-title">
@@ -52,8 +42,13 @@
           
           <!-- Descrição -->
           <p class="hero-description">
-            Descubra como a Escola Seron está construindo o futuro da educação em Teresópolis, RJ.
+            Descubra como a Escola Cerom está construindo o futuro da educação em Teresópolis, RJ.
             Uma jornada interativa através do tempo, mostrando nossa evolução e visão para os próximos 50 anos.
+          </p>
+          
+          <!-- Créditos -->
+          <p class="hero-credits">
+            Criado por Danilo Farias Pereira
           </p>
           
           <!-- Botão de ação -->
@@ -65,16 +60,6 @@
             >
               <span v-if="!isLoading">Explorar o Futuro</span>
               <span v-else class="loading-spinner">Carregando...</span>
-            </button>
-            
-            <!-- Botão secundário para vídeo -->
-            <button 
-              class="btn-secondary"
-              @click="toggleVideoMute"
-              :class="{ 'muted': isVideoMuted }"
-            >
-              <span class="btn-icon">{{ isVideoMuted ? '🔇' : '🔊' }}</span>
-              {{ isVideoMuted ? 'Ativar Som' : 'Desativar Som' }}
             </button>
           </div>
         </div>
@@ -101,9 +86,7 @@ export default {
   name: 'HeroSection',
   data() {
     return {
-      isLoading: true,
-      isVideoMuted: true,
-      videoLoaded: false
+      isLoading: true
     }
   },
   mounted() {
@@ -116,23 +99,6 @@ export default {
     this.initParallaxEffects()
   },
   methods: {
-    onVideoLoaded() {
-      this.videoLoaded = true
-      console.log('Vídeo carregado com sucesso')
-    },
-    
-    onLogoError() {
-      console.log('Logo não encontrado, usando placeholder')
-      // Aqui você pode definir uma imagem de fallback
-    },
-    
-    toggleVideoMute() {
-      if (this.$refs.heroVideo) {
-        this.isVideoMuted = !this.isVideoMuted
-        this.$refs.heroVideo.muted = this.isVideoMuted
-      }
-    },
-    
     scrollToNextSection() {
       const nextSection = document.querySelector('.comparison-section')
       if (nextSection) {
@@ -229,35 +195,12 @@ export default {
   margin: 0 auto;
 }
 
-.logo-container {
-  position: relative;
+.hero-credits {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
   margin-bottom: 30px;
-  display: inline-block;
-}
-
-.school-logo {
-  max-width: 200px;
-  height: auto;
-  filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
-  transition: var(--transition-smooth);
-}
-
-.school-logo:hover {
-  transform: scale(1.05);
-}
-
-.logo-glow {
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background: var(--gradient-primary);
-  border-radius: 50%;
-  opacity: 0.3;
-  filter: blur(20px);
-  z-index: -1;
-  animation: pulse 3s infinite;
+  font-style: italic;
+  opacity: 0.8;
 }
 
 .hero-title {

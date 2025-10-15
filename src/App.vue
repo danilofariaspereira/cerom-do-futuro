@@ -25,14 +25,14 @@
     <footer class="footer">
       <div class="container">
         <div class="footer-content">
-          <div class="footer-logo">
-            <h3 class="text-gradient">Seron do Futuro</h3>
-            <p>Escola Seron - Teresópolis, RJ</p>
-          </div>
-          <div class="footer-info">
-            <p>&copy; 2024 Escola Seron. Todos os direitos reservados.</p>
-            <p>Desenvolvido com ❤️ para o futuro da educação</p>
-          </div>
+           <div class="footer-logo">
+             <h3 class="text-gradient">Cerom do Futuro</h3>
+             <p>Escola Cerom - Teresópolis, RJ</p>
+           </div>
+           <div class="footer-info">
+             <p>&copy; 2024 Escola Cerom. Todos os direitos reservados.</p>
+             <p>Desenvolvido com ❤️ para o futuro da educação</p>
+           </div>
         </div>
       </div>
     </footer>

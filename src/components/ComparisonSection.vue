@@ -346,14 +346,17 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   backdrop-filter: blur(5px);
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .modal-content {
@@ -361,11 +364,13 @@ export default {
   border-radius: 20px;
   padding: 30px;
   max-width: 800px;
-  width: 90%;
-  max-height: 80vh;
+  width: calc(100vw - 40px);
+  max-height: calc(100vh - 40px);
   overflow-y: auto;
   border: 1px solid rgba(0, 212, 255, 0.3);
   position: relative;
+  margin: auto;
+  box-sizing: border-box;
 }
 
 .modal-close {
@@ -504,8 +509,10 @@ export default {
   }
   
   .modal-content {
-    padding: 15px;
+    padding: 20px;
     margin: 10px;
+    max-height: calc(100vh - 20px);
+    width: calc(100vw - 20px);
   }
   
   .modal-title {
@@ -523,6 +530,56 @@ export default {
   
   .modal-description {
     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 15px;
+    margin: 5px;
+    max-height: calc(100vh - 10px);
+    width: calc(100vw - 10px);
+    border-radius: 15px;
+  }
+  
+  .modal-title {
+    font-size: 1.3rem;
+  }
+  
+  .modal-images {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .modal-image-group img {
+    height: 100px;
+  }
+  
+  .image-description {
+    font-size: 0.7rem;
+    padding: 4px;
+  }
+  
+  .modal-description {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .modal-content {
+    padding: 10px;
+    margin: 2px;
+    max-height: calc(100vh - 4px);
+    width: calc(100vw - 4px);
+    border-radius: 10px;
+  }
+  
+  .modal-title {
+    font-size: 1.1rem;
+  }
+  
+  .modal-image-group img {
+    height: 80px;
   }
 }
 </style>
