@@ -553,6 +553,11 @@ export default {
   line-height: 1.4;
 }
 
+/* Mensagens da IA com melhor contraste (texto em branco) */
+.ai-message .message-content p {
+  color: #ffffff;
+}
+
 .message-time {
   font-size: 0.7rem;
   opacity: 0.7;
@@ -613,20 +618,21 @@ export default {
 }
 
 .quick-question-btn {
-  background: transparent;
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 20px;
   padding: 8px 16px;
-  color: var(--text-secondary);
+  color: #ffffff;
   cursor: pointer;
   transition: var(--transition-smooth);
   font-size: 0.8rem;
 }
 
 .quick-question-btn:hover:not(:disabled) {
-  background: rgba(0, 212, 255, 0.1);
-  border-color: var(--primary-blue);
-  color: var(--primary-blue);
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.25);
+  color: #ffffff;
+  transform: translateY(-2px);
 }
 
 .quick-question-btn:disabled {

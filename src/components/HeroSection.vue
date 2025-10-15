@@ -20,6 +20,9 @@
         </div>
       </video>
       
+      <!-- Canvas para partículas e linhas (efeito tipo DeckCode) -->
+      <canvas ref="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
+      
       <!-- Overlay com gradiente -->
       <div class="video-overlay"></div>
     </div>
@@ -27,7 +30,9 @@
     <!-- Conteúdo principal -->
     <div class="hero-content">
       <div class="container">
-        <div class="hero-text animate-on-scroll">
+        <!-- Painel de vidro para melhorar legibilidade sobre o vídeo -->
+        <div class="hero-text-panel">
+          <div class="hero-text animate-on-scroll">
           
           <!-- Título principal -->
           <h1 class="hero-title">
@@ -62,6 +67,7 @@
               <span v-else class="loading-spinner">Carregando...</span>
             </button>
           </div>
+          </div>
         </div>
         
         <!-- Elementos decorativos -->
@@ -69,6 +75,10 @@
           <div class="floating-element element-1"></div>
           <div class="floating-element element-2"></div>
           <div class="floating-element element-3"></div>
+          <!-- Animated background blobs (pure CSS) -->
+          <div class="blob blob-1"></div>
+          <div class="blob blob-2"></div>
+          <div class="blob blob-3"></div>
         </div>
       </div>
     </div>
@@ -97,6 +107,13 @@ export default {
     
     // Adicionar efeitos de parallax
     this.initParallaxEffects()
+    // Inicializar canvas de partículas
+    this.initParticleCanvas()
+  },
+  beforeUnmount() {
+    // limpar animações e listeners do canvas
+    this.destroyParticleCanvas()
+    window.removeEventListener('scroll', this._parallaxHandler)
   },
   methods: {
     scrollToNextSection() {
@@ -110,7 +127,8 @@ export default {
     },
     
     initParallaxEffects() {
-      window.addEventListener('scroll', () => {
+      // armazenar handler para remover depois
+      this._parallaxHandler = () => {
         const scrolled = window.pageYOffset
         const parallaxElements = document.querySelectorAll('.floating-element')
         
@@ -118,7 +136,143 @@ export default {
           const speed = 0.5 + (index * 0.1)
           element.style.transform = `translateY(${scrolled * speed}px)`
         })
-      })
+      }
+      window.addEventListener('scroll', this._parallaxHandler)
+    }
+    ,
+
+    /* --------------------------- Canvas Particles --------------------------- */
+    initParticleCanvas() {
+      const canvas = this.$refs.heroCanvas
+      if (!canvas) return
+
+      this._ctx = canvas.getContext('2d')
+      this._particles = []
+      this._mouse = { x: null, y: null }
+      this._animationId = null
+
+      const resize = () => {
+        const dpr = window.devicePixelRatio || 1
+        canvas.width = Math.floor(canvas.clientWidth * dpr)
+        canvas.height = Math.floor(canvas.clientHeight * dpr)
+        this._ctx.scale(dpr, dpr)
+      }
+
+      // make canvas cover container
+      const parent = canvas.parentElement
+      canvas.style.width = '100%'
+      canvas.style.height = '100%'
+
+      resize()
+      window.addEventListener('resize', resize)
+      this._particleResize = resize
+
+      // create particles proportional to area
+      const area = (canvas.clientWidth * canvas.clientHeight) / 1000
+      const count = Math.max(20, Math.floor(area))
+
+      for (let i = 0; i < count; i++) {
+        this._particles.push(this._createParticle(canvas))
+      }
+
+      // mouse events
+      const onMove = (e) => {
+        const rect = canvas.getBoundingClientRect()
+        this._mouse.x = e.clientX - rect.left
+        this._mouse.y = e.clientY - rect.top
+      }
+      const onLeave = () => { this._mouse.x = null; this._mouse.y = null }
+
+      canvas.addEventListener('mousemove', onMove)
+      canvas.addEventListener('mouseleave', onLeave)
+
+      this._particleListeners = { onMove, onLeave }
+
+      const loop = () => {
+        this._animationId = requestAnimationFrame(loop)
+        this._drawParticles(canvas)
+      }
+      loop()
+    },
+
+    destroyParticleCanvas() {
+      const canvas = this.$refs.heroCanvas
+      if (!canvas) return
+      if (this._animationId) cancelAnimationFrame(this._animationId)
+      if (this._particleResize) window.removeEventListener('resize', this._particleResize)
+      if (this._particleListeners) {
+        canvas.removeEventListener('mousemove', this._particleListeners.onMove)
+        canvas.removeEventListener('mouseleave', this._particleListeners.onLeave)
+      }
+      this._particles = []
+      this._ctx = null
+    },
+
+    _createParticle(canvas) {
+      const x = Math.random() * canvas.clientWidth
+      const y = Math.random() * canvas.clientHeight
+      const vx = (Math.random() - 0.5) * 0.6
+      const vy = (Math.random() - 0.5) * 0.6
+      const r = 1 + Math.random() * 2
+      const hue = 190 + Math.random() * 60 // bluish
+      return { x, y, vx, vy, r, hue }
+    },
+
+    _drawParticles(canvas) {
+      const ctx = this._ctx
+      if (!ctx) return
+      const w = canvas.clientWidth
+      const h = canvas.clientHeight
+
+      // clear with slight transparent fill to produce trailing
+      ctx.clearRect(0, 0, w, h)
+
+      // update and draw particles
+      for (let p of this._particles) {
+        p.x += p.vx
+        p.y += p.vy
+
+        // bounce
+        if (p.x < 0 || p.x > w) p.vx *= -1
+        if (p.y < 0 || p.y > h) p.vy *= -1
+
+        // mouse interaction - gentle attraction
+        if (this._mouse.x != null) {
+          const dx = this._mouse.x - p.x
+          const dy = this._mouse.y - p.y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          if (dist < 120) {
+            p.vx += dx / 10000
+            p.vy += dy / 10000
+          }
+        }
+
+        // draw
+        ctx.beginPath()
+        ctx.fillStyle = `hsla(${p.hue}, 80%, 60%, 0.95)`
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+        ctx.fill()
+      }
+
+      // connect lines
+      for (let i = 0; i < this._particles.length; i++) {
+        for (let j = i + 1; j < this._particles.length; j++) {
+          const a = this._particles[i]
+          const b = this._particles[j]
+          const dx = a.x - b.x
+          const dy = a.y - b.y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          if (dist < 120) {
+            const alpha = 1 - dist / 120
+            ctx.beginPath()
+            ctx.strokeStyle = `rgba(170,220,255,${alpha * 0.6})`
+            ctx.lineWidth = 0.8
+            ctx.moveTo(a.x, a.y)
+            ctx.lineTo(b.x, b.y)
+            ctx.stroke()
+          }
+        }
+      }
     }
   }
 }
@@ -142,6 +296,16 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 1;
+}
+
+.hero-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto; /* allow mouse interaction for subtle attraction */
+  z-index: 1.5; /* sits above video but below overlay (overlay is z-index:2) */
 }
 
 .hero-video {
@@ -195,6 +359,27 @@ export default {
   margin: 0 auto;
 }
 
+/* Painel de vidro (frosted glass) ao redor do conteúdo textual */
+.hero-text-panel {
+  display: inline-block;
+  padding: 28px 36px 36px 36px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 40px rgba(8,10,20,0.6);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  z-index: 3;
+}
+
+@media (max-width: 768px) {
+  .hero-text-panel {
+    padding: 20px;
+    margin: 0 12px;
+    border-radius: 12px;
+  }
+}
+
 .hero-credits {
   font-size: 0.9rem;
   color: var(--text-secondary);
@@ -211,6 +396,13 @@ export default {
   line-height: 1.1;
 }
 
+/* Forçar o título principal em branco para maior destaque */
+.hero-title,
+.title-line,
+.title-line.text-gradient {
+  color: #ffffff;
+}
+
 .title-line {
   display: block;
   animation: fadeInUp 1s ease-out;
@@ -222,7 +414,7 @@ export default {
 
 .hero-subtitle {
   font-size: clamp(1.2rem, 3vw, 2rem);
-  color: var(--text-secondary);
+  color: #ffffff;
   margin-bottom: 20px;
   font-weight: 300;
   letter-spacing: 2px;
@@ -231,12 +423,54 @@ export default {
 
 .hero-description {
   font-size: 1.1rem;
-  color: var(--text-secondary);
+  color: rgba(255,255,255,0.95);
   margin-bottom: 40px;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.8;
+}
+
+/* Background blobs */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.55;
+  transform: translate3d(0,0,0);
+}
+.blob-1 {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle at 30% 30%, rgba(139,92,246,0.9), rgba(139,92,246,0.25) 40%, transparent 60%);
+  top: -10%;
+  left: -8%;
+  animation: blobMove 12s ease-in-out infinite;
+  z-index: 1;
+}
+.blob-2 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle at 70% 40%, rgba(0,212,255,0.85), rgba(0,212,255,0.18) 40%, transparent 60%);
+  top: 10%;
+  right: -6%;
+  animation: blobMove 14s ease-in-out infinite reverse;
+  z-index: 1;
+}
+.blob-3 {
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle at 40% 70%, rgba(255,200,80,0.75), rgba(255,200,80,0.12) 40%, transparent 60%);
+  bottom: -8%;
+  left: 20%;
+  animation: blobMove 18s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes blobMove {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(30px) scale(1.05); }
+  100% { transform: translateY(0) scale(1); }
 }
 
 .hero-actions {
