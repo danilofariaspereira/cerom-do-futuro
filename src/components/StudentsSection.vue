@@ -29,6 +29,7 @@
               :alt="`${student.name} - Atual`"
               class="student-photo current-photo"
               :class="{ 'active': activeStudent === index }"
+              onerror="this.onerror=null;this.src='/images/placeholder.svg'"
             >
             
             <!-- Foto futura -->
@@ -37,6 +38,7 @@
               :alt="`${student.name} - Futuro`"
               class="student-photo future-photo"
               :class="{ 'active': activeStudent === index }"
+              onerror="this.onerror=null;this.src='/images/placeholder.svg'"
             >
             
             <!-- Overlay de transição -->
@@ -123,7 +125,7 @@
           
           <div class="modal-header">
             <div class="modal-student-photo">
-              <img :src="selectedStudent.currentPhoto" :alt="selectedStudent.name">
+              <img :src="selectedStudent.currentPhoto" :alt="selectedStudent.name" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
             </div>
             <div class="modal-student-info">
               <h3 class="modal-title">{{ selectedStudent.name }}</h3>
@@ -187,8 +189,8 @@ export default {
           name: 'Ana Silva',
           grade: '9º Ano',
           age: 14,
-          currentPhoto: '/images/aluno-ana-atual.jpg',
-          futurePhoto: '/images/aluno-ana-futuro.jpg',
+          currentPhoto: '/images/tia-ana.png',
+          futurePhoto: '/images/tia-ana.png',
           aspirations: ['Engenharia Espacial', 'Pesquisa Científica', 'Inovação Tecnológica'],
           testimonial: 'Quero ser uma engenheira espacial e contribuir para a exploração do universo. A Escola Seron me prepara para esse futuro incrível!',
           futureVision: 'Vejo-me trabalhando na NASA ou SpaceX, desenvolvendo tecnologias para colonização de outros planetas.',
@@ -208,8 +210,8 @@ export default {
           name: 'Carlos Mendes',
           grade: '8º Ano',
           age: 13,
-          currentPhoto: '/images/aluno-carlos-atual.jpg',
-          futurePhoto: '/images/aluno-carlos-futuro.jpg',
+          currentPhoto: '/images/paulo-portugues.png',
+          futurePhoto: '/images/paulo-portugues.png',
           aspirations: ['Medicina Digital', 'Inteligência Artificial', 'Saúde Preventiva'],
           testimonial: 'Sonho em usar a tecnologia para salvar vidas. Quero desenvolver sistemas de IA que ajudem médicos a diagnosticar doenças.',
           futureVision: 'Trabalharei em hospitais inteligentes, onde a IA e a medicina se unem para criar tratamentos personalizados.',
@@ -229,8 +231,8 @@ export default {
           name: 'Marina Costa',
           grade: '7º Ano',
           age: 12,
-          currentPhoto: '/images/aluno-marina-atual.jpg',
-          futurePhoto: '/images/aluno-marina-futuro.jpg',
+          currentPhoto: '/images/danielle-portugues.png',
+          futurePhoto: '/images/danielle-portugues.png',
           aspirations: ['Arte Digital', 'Design de Jogos', 'Realidade Virtual'],
           testimonial: 'Amo criar mundos virtuais onde as pessoas podem aprender e se divertir. A tecnologia é minha tela em branco!',
           futureVision: 'Serei uma designer de experiências imersivas, criando jogos educacionais que transformam o aprendizado.',
@@ -250,8 +252,8 @@ export default {
           name: 'Pedro Santos',
           grade: '6º Ano',
           age: 11,
-          currentPhoto: '/images/aluno-pedro-atual.jpg',
-          futurePhoto: '/images/aluno-pedro-futuro.jpg',
+          currentPhoto: '/images/vitor-educacao-fisica.png',
+          futurePhoto: '/images/vitor-educacao-fisica.png',
           aspirations: ['Robótica', 'Automação', 'Inovação Industrial'],
           testimonial: 'Robôs são fascinantes! Quero criar máquinas que ajudem as pessoas e tornem o trabalho mais eficiente.',
           futureVision: 'Desenvolverei robôs assistentes para ajudar pessoas com deficiência e automatizar tarefas domésticas.',
@@ -627,8 +629,8 @@ export default {
 }
 
 .modal-student-photo img {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--primary-blue);

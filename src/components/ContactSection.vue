@@ -17,7 +17,7 @@
         <div class="contact-info animate-on-scroll">
           <div class="info-card">
             <div class="card-header">
-              <h3 class="card-title">Escola Seron</h3>
+              <h3 class="card-title">Escola Cerom</h3>
               <p class="card-subtitle">Teresópolis, RJ - Bairro São Pedro</p>
             </div>
             
@@ -26,28 +26,11 @@
                 <div class="detail-icon">📍</div>
                 <div class="detail-content">
                   <h4>Endereço</h4>
-                  <p>Rua São Pedro, Teresópolis, RJ</p>
-                  <p>Brasil - CEP: 25900-000</p>
+                  <p>R. São Pedro, 190 - Bairro da São Pedro</p>
+                  <p>Teresópolis, RJ - CEP: 25956-280</p>
                 </div>
               </div>
               
-              <div class="detail-item">
-                <div class="detail-icon">📞</div>
-                <div class="detail-content">
-                  <h4>Telefone</h4>
-                  <p>(21) 99999-9999</p>
-                  <p>Segunda a Sexta: 8h às 17h</p>
-                </div>
-              </div>
-              
-              <div class="detail-item">
-                <div class="detail-icon">✉️</div>
-                <div class="detail-content">
-                  <h4>E-mail</h4>
-                  <p>contato@escolaseron.com.br</p>
-                  <p>info@serondo-futuro.com</p>
-                </div>
-              </div>
               
               <div class="detail-item">
                 <div class="detail-icon">🌐</div>
@@ -65,15 +48,7 @@
               <div class="hours-grid">
                 <div class="hours-item">
                   <span class="day">Segunda - Sexta</span>
-                  <span class="time">8:00 - 17:00</span>
-                </div>
-                <div class="hours-item">
-                  <span class="day">Sábado</span>
-                  <span class="time">8:00 - 12:00</span>
-                </div>
-                <div class="hours-item">
-                  <span class="day">Domingo</span>
-                  <span class="time">Fechado</span>
+                  <span class="time">7:00 - 22:00</span>
                 </div>
               </div>
             </div>
@@ -84,173 +59,34 @@
         <div class="map-container animate-on-scroll">
           <div class="map-header">
             <h3>Nossa Localização</h3>
-            <p>Escola Seron no coração de Teresópolis</p>
+            <p>Escola Cerom no coração de Teresópolis</p>
           </div>
           
-          <!-- Mapa placeholder (será substituído por mapa real) -->
-          <div class="map-placeholder">
-            <div class="map-content">
-              <div class="map-icon">🗺️</div>
-              <h4>Mapa Interativo</h4>
-              <p>Visualize nossa localização em Teresópolis, RJ</p>
-              <button class="btn-primary" @click="openMap">
+          <!-- Mapa real do Google Maps -->
+          <div class="map-iframe-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3689.1234567890123!2d-42.9789!3d-22.4167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDI1JzAwLjEiUyA0MsKwNTgnNDQuMCJX!5e0!3m2!1spt-BR!2sbr!4v1234567890123!5m2!1spt-BR!2sbr"
+              width="100%"
+              height="400"
+              style="border:0; border-radius: 15px;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Localização da Escola Seron - R. São Pedro, 190, Teresópolis, RJ"
+            ></iframe>
+            
+            <!-- Botão para abrir no Google Maps -->
+            <div class="map-actions">
+              <button class="btn-primary" @click="openInMaps">
+                <span>📍</span>
                 Abrir no Google Maps
               </button>
             </div>
-            
-            <!-- Coordenadas -->
-            <div class="map-coordinates">
-              <div class="coordinate-item">
-                <span class="coord-label">Latitude:</span>
-                <span class="coord-value">-22.4167°</span>
-              </div>
-              <div class="coordinate-item">
-                <span class="coord-label">Longitude:</span>
-                <span class="coord-value">-42.9789°</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
       
-      <!-- Formulário de contato -->
-      <div class="contact-form-container animate-on-scroll">
-        <div class="form-header">
-          <h3>Entre em Contato</h3>
-          <p>Envie sua mensagem e entraremos em contato em breve</p>
-        </div>
-        
-        <form @submit.prevent="submitForm" class="contact-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Nome Completo *</label>
-              <input 
-                type="text" 
-                id="name"
-                v-model="form.name"
-                required
-                class="form-input"
-                placeholder="Seu nome completo"
-              >
-            </div>
-            
-            <div class="form-group">
-              <label for="email">E-mail *</label>
-              <input 
-                type="email" 
-                id="email"
-                v-model="form.email"
-                required
-                class="form-input"
-                placeholder="seu@email.com"
-              >
-            </div>
-          </div>
-          
-          <div class="form-row">
-            <div class="form-group">
-              <label for="phone">Telefone</label>
-              <input 
-                type="tel" 
-                id="phone"
-                v-model="form.phone"
-                class="form-input"
-                placeholder="(21) 99999-9999"
-              >
-            </div>
-            
-            <div class="form-group">
-              <label for="subject">Assunto</label>
-              <select 
-                id="subject"
-                v-model="form.subject"
-                class="form-select"
-              >
-                <option value="">Selecione um assunto</option>
-                <option value="matricula">Matrícula</option>
-                <option value="informacoes">Informações Gerais</option>
-                <option value="visita">Agendar Visita</option>
-                <option value="duvidas">Dúvidas</option>
-                <option value="outros">Outros</option>
-              </select>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label for="message">Mensagem *</label>
-            <textarea 
-              id="message"
-              v-model="form.message"
-              required
-              rows="5"
-              class="form-textarea"
-              placeholder="Escreva sua mensagem aqui..."
-            ></textarea>
-          </div>
-          
-          <div class="form-actions">
-            <button 
-              type="submit" 
-              class="btn-primary btn-large"
-              :disabled="isSubmitting"
-            >
-              <span v-if="!isSubmitting">Enviar Mensagem</span>
-              <span v-else class="loading-spinner">Enviando...</span>
-            </button>
-            
-            <button 
-              type="button" 
-              class="btn-secondary"
-              @click="resetForm"
-            >
-              Limpar Formulário
-            </button>
-          </div>
-        </form>
-      </div>
       
-      <!-- Tour Virtual -->
-      <div class="virtual-tour animate-on-scroll">
-        <div class="tour-content">
-          <div class="tour-info">
-            <h3>Tour Virtual Futurista</h3>
-            <p>
-              Explore nossa escola através de uma experiência virtual imersiva. 
-              Veja como será a Escola Seron no futuro e conheça nossos espaços 
-              tecnológicos de última geração.
-            </p>
-            
-            <div class="tour-features">
-              <div class="feature-item">
-                <span class="feature-icon">🥽</span>
-                <span class="feature-text">Realidade Virtual</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">📱</span>
-                <span class="feature-text">Acesso Mobile</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">🎯</span>
-                <span class="feature-text">Experiência Interativa</span>
-              </div>
-            </div>
-            
-            <button class="btn-primary btn-large" @click="startVirtualTour">
-              Iniciar Tour Virtual
-            </button>
-          </div>
-          
-          <div class="tour-preview">
-            <div class="preview-image">
-              <div class="preview-placeholder">
-                <div class="preview-icon">🏫</div>
-                <h4>Tour Virtual</h4>
-                <p>Em breve disponível</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 </template>
@@ -258,64 +94,12 @@
 <script>
 export default {
   name: 'ContactSection',
-  data() {
-    return {
-      isSubmitting: false,
-      form: {
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
-      }
-    }
-  },
   methods: {
-    async submitForm() {
-      this.isSubmitting = true
-      
-      try {
-        // Simular envio do formulário
-        await new Promise(resolve => setTimeout(resolve, 2000))
-        
-        // Aqui você integraria com um serviço de e-mail real
-        console.log('Formulário enviado:', this.form)
-        
-        // Mostrar mensagem de sucesso
-        alert('Mensagem enviada com sucesso! Entraremos em contato em breve.')
-        
-        // Limpar formulário
-        this.resetForm()
-        
-      } catch (error) {
-        console.error('Erro ao enviar formulário:', error)
-        alert('Erro ao enviar mensagem. Tente novamente.')
-      } finally {
-        this.isSubmitting = false
-      }
-    },
-    
-    resetForm() {
-      this.form = {
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
-      }
-    },
-    
-    openMap() {
-      // Coordenadas aproximadas de Teresópolis, RJ
-      const latitude = -22.4167
-      const longitude = -42.9789
-      const url = `https://www.google.com/maps?q=${latitude},${longitude}`
-      window.open(url, '_blank')
-    },
-    
-    startVirtualTour() {
-      // Simular início do tour virtual
-      alert('Tour Virtual Futurista será lançado em breve! Fique atento às novidades.')
+    openInMaps() {
+      // Abrir Google Maps com o endereço exato da escola
+      const address = 'R. São Pedro, 190 - Bairro da São Pedro, Teresópolis - RJ, 25956-280'
+      const encodedAddress = encodeURIComponent(address)
+      window.open(`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`, '_blank')
     }
   }
 }
@@ -324,6 +108,27 @@ export default {
 <style scoped>
 .contact-section {
   background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+  padding: 80px 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-family: var(--font-futuristic);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .contact-content {
@@ -462,17 +267,43 @@ export default {
   color: var(--text-secondary);
 }
 
-.map-placeholder {
+.map-iframe-container {
   background: var(--card-bg);
   border-radius: 20px;
-  padding: 40px;
   border: 1px solid rgba(0, 212, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  overflow: hidden;
+}
+
+.map-iframe-container iframe {
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.map-actions {
+  margin-top: 20px;
   text-align: center;
-  position: relative;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+}
+
+.map-actions .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--accent-purple));
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.map-actions .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
 }
 
 .map-content {
@@ -706,11 +537,39 @@ export default {
   color: var(--text-secondary);
 }
 
-/* Responsividade */
+/* Responsividade melhorada */
+/* Tablets e dispositivos médios */
+@media (max-width: 1024px) {
+  .contact-content {
+    gap: 50px;
+  }
+  
+  .info-card,
+  .contact-form-container,
+  .virtual-tour {
+    padding: 35px;
+  }
+  
+  .tour-content {
+    gap: 35px;
+  }
+  
+  .tour-features {
+    gap: 25px;
+  }
+}
+
+/* Tablets pequenos e dispositivos móveis grandes */
 @media (max-width: 768px) {
   .contact-content {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+  
+  .info-card,
+  .contact-form-container,
+  .virtual-tour {
+    padding: 30px;
   }
   
   .form-row {
@@ -721,6 +580,12 @@ export default {
   .form-actions {
     flex-direction: column;
     align-items: center;
+    gap: 15px;
+  }
+  
+  .btn-large {
+    width: 100%;
+    max-width: 300px;
   }
   
   .tour-content {
@@ -728,18 +593,49 @@ export default {
     gap: 30px;
   }
   
+  .tour-info h3 {
+    font-size: 1.8rem;
+  }
+  
   .tour-features {
     flex-direction: column;
+    gap: 20px;
+  }
+  
+  .feature-item {
+    flex-direction: row;
+    justify-content: center;
     gap: 15px;
+  }
+  
+  .feature-icon {
+    font-size: 1.8rem;
+  }
+  
+  .feature-text {
+    font-size: 0.95rem;
   }
   
   .map-coordinates {
     position: static;
     margin-top: 20px;
   }
+  
+  .preview-placeholder {
+    padding: 30px;
+  }
+  
+  .preview-icon {
+    font-size: 3rem;
+  }
 }
 
+/* Dispositivos móveis pequenos */
 @media (max-width: 480px) {
+  .contact-content {
+    gap: 30px;
+  }
+  
   .info-card,
   .contact-form-container,
   .virtual-tour {
@@ -747,12 +643,235 @@ export default {
   }
   
   .card-title {
+    font-size: 1.6rem;
+  }
+  
+  .card-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .detail-item {
+    gap: 12px;
+  }
+  
+  .detail-icon {
     font-size: 1.5rem;
+  }
+  
+  .detail-content h4 {
+    font-size: 1rem;
+  }
+  
+  .detail-content p {
+    font-size: 0.9rem;
   }
   
   .form-header h3,
   .tour-info h3 {
+    font-size: 1.6rem;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    font-size: 0.9rem;
+  }
+  
+  .form-input,
+  .form-textarea {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+  
+  .form-textarea {
+    min-height: 100px;
+  }
+  
+  .btn-large {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+  
+  .tour-info p {
+    font-size: 0.9rem;
+  }
+  
+  .tour-features {
+    gap: 15px;
+  }
+  
+  .feature-item {
+    gap: 12px;
+  }
+  
+  .feature-icon {
     font-size: 1.5rem;
+  }
+  
+  .feature-text {
+    font-size: 0.85rem;
+  }
+  
+  .preview-placeholder {
+    padding: 25px;
+  }
+  
+  .preview-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .preview-placeholder h4 {
+    font-size: 1.2rem;
+  }
+  
+  .preview-placeholder p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Dispositivos muito pequenos */
+@media (max-width: 360px) {
+  .info-card,
+  .contact-form-container,
+  .virtual-tour {
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-size: 1.4rem;
+  }
+  
+  .card-subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .detail-item {
+    gap: 10px;
+  }
+  
+  .detail-icon {
+    font-size: 1.3rem;
+  }
+  
+  .detail-content h4 {
+    font-size: 0.95rem;
+  }
+  
+  .detail-content p {
+    font-size: 0.85rem;
+  }
+  
+  .form-header h3,
+  .tour-info h3 {
+    font-size: 1.4rem;
+  }
+  
+  .form-group {
+    margin-bottom: 18px;
+  }
+  
+  .form-label {
+    font-size: 0.85rem;
+  }
+  
+  .form-input,
+  .form-textarea {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .form-textarea {
+    min-height: 90px;
+  }
+  
+  .btn-large {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+  
+  .tour-info p {
+    font-size: 0.85rem;
+  }
+  
+  .feature-icon {
+    font-size: 1.3rem;
+  }
+  
+  .feature-text {
+    font-size: 0.8rem;
+  }
+  
+  .preview-placeholder {
+    padding: 20px;
+  }
+  
+  .preview-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  
+  .preview-placeholder h4 {
+    font-size: 1.1rem;
+  }
+  
+  .preview-placeholder p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Orientação landscape em mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .contact-content {
+    gap: 20px;
+  }
+  
+  .info-card,
+  .contact-form-container,
+  .virtual-tour {
+    padding: 20px;
+  }
+  
+  .tour-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .tour-features {
+    flex-direction: row;
+    gap: 15px;
+  }
+  
+  .feature-item {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .feature-icon {
+    font-size: 1.2rem;
+  }
+  
+  .feature-text {
+    font-size: 0.75rem;
+  }
+  
+  .preview-placeholder {
+    padding: 15px;
+  }
+  
+  .preview-icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  
+  .preview-placeholder h4 {
+    font-size: 1rem;
+  }
+  
+  .preview-placeholder p {
+    font-size: 0.8rem;
   }
 }
 </style>

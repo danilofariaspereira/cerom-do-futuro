@@ -15,8 +15,8 @@
     <!-- Infraestrutura Futurista -->
     <InfrastructureSection />
     
-    <!-- QR Code e Acesso Rápido -->
-    <QRCodeSection />
+    <!-- Refeitório Ana Maria IA -->
+    <CafeteriaSection />
     
     <!-- Contato e Localização -->
     <ContactSection />
@@ -45,7 +45,7 @@ import ComparisonSection from './components/ComparisonSection.vue'
 import JarvasSection from './components/JarvasSection.vue'
 import TeachersSection from './components/TeachersSection.vue'
 import InfrastructureSection from './components/InfrastructureSection.vue'
-import QRCodeSection from './components/QRCodeSection.vue'
+import CafeteriaSection from './components/CafeteriaSection.vue'
 import ContactSection from './components/ContactSection.vue'
 
 export default {
@@ -56,7 +56,7 @@ export default {
     JarvasSection,
     TeachersSection,
     InfrastructureSection,
-    QRCodeSection,
+    CafeteriaSection,
     ContactSection
   },
   mounted() {
@@ -91,7 +91,6 @@ export default {
   background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(139, 92, 246, 0.1));
   border-top: 1px solid rgba(0, 212, 255, 0.2);
   padding: 40px 0;
-  margin-top: 80px;
 }
 
 .footer-content {

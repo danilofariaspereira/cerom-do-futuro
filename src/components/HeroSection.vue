@@ -1,30 +1,19 @@
 <template>
   <section class="hero-section">
-    <!-- Vídeo de fundo -->
+    <!-- Imagem de fundo -->
     <div class="video-container">
-      <video 
-        ref="heroVideo"
-        class="hero-video"
-        autoplay 
-        muted 
-        loop 
-        playsinline
-        @loadeddata="onVideoLoaded"
-      >
-        <source src="/videos/seron-futuro-hero.mp4" type="video/mp4">
-        <!-- Fallback para navegadores que não suportam vídeo -->
-        <div class="video-fallback">
-          <div class="fallback-content">
-            <div class="fallback-animation"></div>
-          </div>
-        </div>
-      </video>
+      <div class="hero-background">
+        <img 
+          src="/images/ceron-do-futuro.jpeg" 
+          alt="Escola Cerom do Futuro"
+          class="hero-bg-image"
+          onerror="this.onerror=null;this.src='/images/cerom-hoje.jpeg'"
+        >
+        <div class="bg-overlay"></div>
+      </div>
       
       <!-- Canvas para partículas e linhas (efeito tipo DeckCode) -->
       <canvas ref="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
-      
-      <!-- Overlay com gradiente -->
-      <div class="video-overlay"></div>
     </div>
     
     <!-- Conteúdo principal -->
@@ -96,15 +85,10 @@ export default {
   name: 'HeroSection',
   data() {
     return {
-      isLoading: true
+      isLoading: false
     }
   },
   mounted() {
-    // Simular carregamento inicial
-    setTimeout(() => {
-      this.isLoading = false
-    }, 2000)
-    
     // Adicionar efeitos de parallax
     this.initParallaxEffects()
     // Inicializar canvas de partículas
@@ -312,35 +296,22 @@ export default {
   z-index: 1.5; /* sits above video but below overlay (overlay is z-index:2) */
 }
 
-.hero-video {
+.hero-background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hero-bg-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.7);
+  filter: brightness(0.6) contrast(1.1);
+  transition: var(--transition-smooth);
 }
 
-.video-fallback {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.fallback-content {
-  text-align: center;
-}
-
-.fallback-animation {
-  width: 100px;
-  height: 100px;
-  border: 2px solid var(--primary-blue);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-.video-overlay {
+.bg-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -348,11 +319,11 @@ export default {
   height: 100%;
   background: linear-gradient(
     135deg,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 212, 255, 0.1) 50%,
-    rgba(139, 92, 246, 0.1) 100%
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 212, 255, 0.15) 50%,
+    rgba(139, 92, 246, 0.15) 100%
   );
-  z-index: 2;
+  z-index: 1;
 }
 
 .hero-content {
@@ -600,15 +571,45 @@ export default {
   font-weight: 300;
 }
 
-/* Responsividade */
+/* Responsividade melhorada */
+/* Tablets e dispositivos médios */
+@media (max-width: 1024px) {
+  .hero-section {
+    min-height: 80vh;
+  }
+  
+  .hero-text-panel {
+    padding: 30px 40px 40px 40px;
+  }
+  
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  }
+  
+  .hero-description {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+}
+
+/* Tablets pequenos e dispositivos móveis grandes */
 @media (max-width: 768px) {
   .hero-section {
-    min-height: 500px;
+    min-height: 70vh;
+  }
+  
+  .hero-text-panel {
+    padding: 25px 30px 35px 30px;
+    margin: 0 15px;
   }
   
   .hero-actions {
     flex-direction: column;
     align-items: center;
+    gap: 15px;
   }
   
   .btn-explore,
@@ -620,19 +621,123 @@ export default {
   .floating-element {
     display: none;
   }
+  
+  .blob {
+    opacity: 0.3;
+  }
+  
+  .scroll-indicator {
+    bottom: 20px;
+  }
 }
 
+/* Dispositivos móveis pequenos */
 @media (max-width: 480px) {
+  .hero-section {
+    min-height: 60vh;
+  }
+  
+  .hero-text-panel {
+    padding: 20px 25px 30px 25px;
+    margin: 0 10px;
+    border-radius: 15px;
+  }
+  
   .hero-title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 8vw, 3rem);
+    margin-bottom: 15px;
   }
   
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 4vw, 1.2rem);
+    margin-bottom: 15px;
   }
   
   .hero-description {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+  
+  .hero-credits {
+    font-size: 0.8rem;
+    margin-bottom: 25px;
+  }
+  
+  .btn-explore {
     font-size: 1rem;
+    padding: 12px 28px;
+  }
+  
+  .blob {
+    display: none;
+  }
+  
+  .scroll-indicator {
+    bottom: 15px;
+  }
+  
+  .scroll-arrow {
+    font-size: 1.5rem;
+  }
+  
+  .scroll-indicator span {
+    font-size: 0.8rem;
+  }
+}
+
+/* Dispositivos muito pequenos */
+@media (max-width: 360px) {
+  .hero-text-panel {
+    padding: 15px 20px 25px 20px;
+    margin: 0 8px;
+  }
+  
+  .hero-title {
+    font-size: clamp(1.8rem, 9vw, 2.5rem);
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(0.8rem, 4.5vw, 1rem);
+  }
+  
+  .hero-description {
+    font-size: clamp(0.85rem, 3.5vw, 1rem);
+  }
+}
+
+/* Orientação landscape em mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-section {
+    min-height: 100vh;
+    height: auto;
+  }
+  
+  .hero-text-panel {
+    padding: 15px 25px 20px 25px;
+  }
+  
+  .hero-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 10px;
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+    margin-bottom: 10px;
+  }
+  
+  .hero-description {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    margin-bottom: 20px;
+  }
+  
+  .hero-actions {
+    margin-bottom: 30px;
+  }
+  
+  .scroll-indicator {
+    display: none;
   }
 }
 </style>

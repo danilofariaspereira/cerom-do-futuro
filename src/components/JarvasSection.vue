@@ -19,10 +19,11 @@
             <!-- Foto real da diretora -->
             <div class="director-photo">
               <img 
-                src="/images/diretora-cintia.jpg" 
+                src="/images/diretora-cintia.png" 
                 alt="Diretora Cíntia"
                 class="photo-real"
                 @error="onPhotoError"
+                onerror="this.onerror=null;this.src='/images/placeholder.svg'"
               >
               <div class="photo-frame"></div>
             </div>
@@ -719,7 +720,38 @@ export default {
   }
 }
 
-/* Responsividade */
+/* Responsividade melhorada */
+/* Tablets e dispositivos médios */
+@media (max-width: 1024px) {
+  .jarvas-content {
+    gap: 50px;
+  }
+  
+  .jarvas-container {
+    height: 400px;
+  }
+  
+  .photo-real {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .hologram-container {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .ai-avatar {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .chat-messages {
+    height: 280px;
+  }
+}
+
+/* Tablets pequenos e dispositivos móveis grandes */
 @media (max-width: 768px) {
   .jarvas-content {
     grid-template-columns: 1fr;
@@ -727,12 +759,12 @@ export default {
   }
   
   .jarvas-container {
-    height: 300px;
+    height: 320px;
   }
   
   .photo-real {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
   }
   
   .hologram-container {
@@ -751,10 +783,139 @@ export default {
   
   .info-grid {
     grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .info-card {
+    padding: 25px;
+  }
+  
+  .quick-questions {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
+/* Dispositivos móveis pequenos */
 @media (max-width: 480px) {
+  .jarvas-content {
+    gap: 30px;
+  }
+  
+  .jarvas-container {
+    height: 280px;
+  }
+  
+  .photo-real {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .hologram-container {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .ai-avatar {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .avatar-face {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .eye {
+    width: 10px;
+    height: 10px;
+    top: 22px;
+  }
+  
+  .left-eye {
+    left: 18px;
+  }
+  
+  .right-eye {
+    right: 18px;
+  }
+  
+  .mouth {
+    bottom: 18px;
+    width: 18px;
+    height: 8px;
+  }
+  
+  .chat-messages {
+    height: 220px;
+  }
+  
+  .chat-header {
+    padding: 15px;
+  }
+  
+  .chat-title h3 {
+    font-size: 1.2rem;
+  }
+  
+  .welcome-message {
+    padding: 15px;
+  }
+  
+  .chat-input {
+    padding: 15px;
+  }
+  
+  .input-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .input-container input {
+    width: 100%;
+  }
+  
+  .send-button {
+    width: 100%;
+    padding: 12px;
+  }
+  
+  .quick-questions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .quick-question-btn {
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+  
+  .info-grid {
+    gap: 20px;
+  }
+  
+  .info-card {
+    padding: 20px;
+  }
+  
+  .info-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .info-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  
+  .info-card p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Dispositivos muito pequenos */
+@media (max-width: 360px) {
   .jarvas-container {
     height: 250px;
   }
@@ -765,16 +926,115 @@ export default {
   }
   
   .hologram-container {
-    width: 150px;
+    width: 160px;
+    height: 160px;
+  }
+  
+  .ai-avatar {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .avatar-face {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .eye {
+    width: 8px;
+    height: 8px;
+    top: 20px;
+  }
+  
+  .left-eye {
+    left: 16px;
+  }
+  
+  .right-eye {
+    right: 16px;
+  }
+  
+  .mouth {
+    bottom: 16px;
+    width: 16px;
+    height: 6px;
+  }
+  
+  .chat-messages {
+    height: 200px;
+  }
+  
+  .message-content {
+    max-width: 85%;
+  }
+  
+  .info-card {
+    padding: 18px;
+  }
+  
+  .info-icon {
+    font-size: 2rem;
+  }
+  
+  .info-card h4 {
+    font-size: 1rem;
+  }
+  
+  .info-card p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Orientação landscape em mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .jarvas-content {
+    gap: 20px;
+  }
+  
+  .jarvas-container {
+    height: 200px;
+  }
+  
+  .photo-real {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .hologram-container {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .ai-avatar {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .chat-messages {
     height: 150px;
   }
   
-  .quick-questions {
-    flex-direction: column;
+  .info-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
   }
   
-  .quick-question-btn {
-    text-align: center;
+  .info-card {
+    padding: 15px;
+  }
+  
+  .info-icon {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .info-card h4 {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+  
+  .info-card p {
+    font-size: 0.8rem;
   }
 }
 </style>

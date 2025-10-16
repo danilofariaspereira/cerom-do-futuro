@@ -24,12 +24,13 @@
         >
           <!-- Imagem atual -->
           <div class="comparison-image-container">
-            <img 
-              :src="item.currentImage" 
-              :alt="`${item.title} - Atual`"
-              class="comparison-image current-image"
-              :class="{ 'active': activeItem === index }"
-            >
+              <img 
+                :src="item.currentImage" 
+                :alt="`${item.title} - Atual`"
+                class="comparison-image current-image"
+                :class="{ 'active': activeItem === index }"
+                onerror="this.onerror=null;this.src='/images/placeholder.svg'"
+              >
             
             <!-- Imagem futura -->
             <img 
@@ -37,7 +38,8 @@
               :alt="`${item.title} - Futuro`"
               class="comparison-image future-image"
               :class="{ 'active': activeItem === index }"
-            >
+                onerror="this.onerror=null;this.src='/images/placeholder.svg'"
+              >
             
             <!-- Overlay de transição -->
             <div class="image-overlay" :class="{ 'active': activeItem === index }">
@@ -81,12 +83,12 @@
             <div class="modal-images">
               <div class="modal-image-group">
                 <h4>Hoje</h4>
-                <img :src="selectedItem.currentImage" :alt="`${selectedItem.title} - Atual`">
+                <img :src="selectedItem.currentImage" :alt="`${selectedItem.title} - Atual`" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
                 <p class="image-description">{{ selectedItem.currentFeatures }}</p>
               </div>
               <div class="modal-image-group">
                 <h4>Futuro</h4>
-                <img :src="selectedItem.futureImage" :alt="`${selectedItem.title} - Futuro`">
+                <img :src="selectedItem.futureImage" :alt="`${selectedItem.title} - Futuro`" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
                 <p class="image-description">{{ selectedItem.futureFeatures }}</p>
               </div>
             </div>
@@ -113,26 +115,26 @@ export default {
         {
           title: 'Sala de Aula',
           description: 'O ambiente de aprendizado está sendo transformado',
-          currentImage: '/images/sala-atual.jpg',
-          futureImage: '/images/sala-futuro.jpg',
+          currentImage: '/images/sala-hoje.jpeg',
+          futureImage: '/images/sala-do-futuro.jpeg',
           currentFeatures: 'Quadro tradicional, carteiras fixas, livros físicos',
           futureFeatures: 'Realidade aumentada, mesas interativas, IA personalizada',
           detailedDescription: 'Nossa sala de aula tradicional está evoluindo para um espaço completamente interativo, onde os alunos podem aprender através de realidade aumentada, mesas inteligentes que respondem ao toque e sistemas de IA que adaptam o conteúdo às necessidades individuais de cada estudante.'
         },
         {
-          title: 'Laboratório de Informática',
-          description: 'Tecnologia avançada para o aprendizado digital',
-          currentImage: '/images/lab-atual.jpg',
-          futureImage: '/images/lab-futuro.jpg',
-          currentFeatures: 'Computadores desktop, internet básica, software educacional',
-          futureFeatures: 'Computação quântica, hologramas, programação neural',
-          detailedDescription: 'O laboratório de informática será equipado com computadores quânticos, permitindo que os alunos explorem conceitos avançados de programação e visualizem dados complexos através de hologramas interativos.'
+          title: 'Biblioteca',
+          description: 'Centro de conhecimento e aprendizado digital',
+          currentImage: '/images/biblioteca.jpeg',
+          futureImage: '/images/biblioteca.png',
+          currentFeatures: 'Livros físicos, mesas de estudo, computadores básicos',
+          futureFeatures: 'Realidade virtual, livros digitais interativos, IA de pesquisa',
+          detailedDescription: 'Nossa biblioteca será transformada em um centro de conhecimento digital, com livros em realidade virtual, sistemas de IA que ajudam na pesquisa e espaços de estudo imersivos que transportam os alunos para diferentes épocas e lugares.'
         },
         {
           title: 'Quadra Esportiva',
           description: 'Esportes do futuro com tecnologia integrada',
-          currentImage: '/images/quadra-atual.jpg',
-          futureImage: '/images/quadra-futuro.jpg',
+          currentImage: '/images/quadra-hoje.jpeg',
+          futureImage: '/images/quadra do futuro.jpeg',
           currentFeatures: 'Quadra tradicional, equipamentos básicos, cronometragem manual',
           futureFeatures: 'Piso inteligente, sensores biométricos, treinamento com IA',
           detailedDescription: 'Nossa quadra esportiva terá um piso inteligente que monitora performance, sensores biométricos que acompanham a saúde dos alunos e sistemas de IA que personalizam treinos baseados nas capacidades individuais.'
@@ -140,11 +142,29 @@ export default {
         {
           title: 'Corredores da Escola',
           description: 'Espaços de convivência e aprendizado contínuo',
-          currentImage: '/images/corredor-atual.jpg',
-          futureImage: '/images/corredor-futuro.jpg',
+          currentImage: '/images/escada-hoje.jpeg',
+          futureImage: '/images/escada-futuro.jpg',
           currentFeatures: 'Corredores simples, quadros informativos, iluminação básica',
           futureFeatures: 'Corredores interativos, projeções holográficas, jardins verticais',
           detailedDescription: 'Os corredores se tornarão espaços de aprendizado contínuo, com projeções holográficas que mostram informações educacionais, jardins verticais que purificam o ar e sistemas de iluminação inteligente que se adaptam ao humor e energia dos alunos.'
+        },
+        {
+          title: 'Refeitório',
+          description: 'Espaço de alimentação e convivência',
+          currentImage: '/images/fereitorio-hoje.jpeg',
+          futureImage: '/images/refeitorio.jpg',
+          currentFeatures: 'Mesas tradicionais, cardápio fixo, atendimento manual',
+          futureFeatures: 'IA da Tia Ana, cardápio personalizado, robôs de atendimento',
+          detailedDescription: 'Nosso refeitório será transformado com a IA da Tia Ana, que personaliza cardápios baseados nas preferências e necessidades nutricionais de cada aluno, além de robôs que auxiliam no atendimento e distribuição das refeições.'
+        },
+        {
+          title: 'Cozinha',
+          description: 'Preparação de refeições com tecnologia avançada',
+          currentImage: '/images/cozinha.jpeg',
+          futureImage: '/images/cozinha-do-futuro.jpg',
+          currentFeatures: 'Equipamentos básicos, preparação manual, cardápio limitado',
+          futureFeatures: 'Robôs chef, impressão 3D de alimentos, IA nutricional',
+          detailedDescription: 'Nossa cozinha terá robôs chef que preparam refeições com precisão, impressoras 3D que criam alimentos personalizados e sistemas de IA que garantem o equilíbrio nutricional perfeito para cada aluno.'
         }
       ]
     }
@@ -203,7 +223,7 @@ export default {
 
 .comparison-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
   margin-bottom: 60px;
 }
@@ -360,9 +380,9 @@ export default {
   background: var(--card-bg);
   border-radius: 20px;
   padding: 30px;
-  max-width: 800px;
-  width: 90%;
-  max-height: 80vh;
+  max-width: 720px;
+  width: 95%;
+  max-height: 85vh;
   overflow-y: auto;
   border: 1px solid rgba(0, 212, 255, 0.3);
   position: relative;
@@ -416,11 +436,17 @@ export default {
 
 .modal-image-group img {
   width: 100%;
-  height: 200px;
+  height: 300px;
   object-fit: cover;
   border-radius: 10px;
   border: 2px solid rgba(0, 212, 255, 0.3);
   margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .modal-images {
+    grid-template-columns: 1fr;
+  }
 }
 
 .image-description {
@@ -440,7 +466,24 @@ export default {
   font-size: 1.1rem;
 }
 
-/* Responsividade */
+/* Responsividade melhorada */
+/* Tablets e dispositivos médios */
+@media (max-width: 1024px) {
+  .comparison-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+  }
+  
+  .comparison-image-container {
+    height: 220px;
+  }
+  
+  .modal-images {
+    gap: 15px;
+  }
+}
+
+/* Tablets pequenos e dispositivos móveis grandes */
 @media (max-width: 768px) {
   .comparison-grid {
     grid-template-columns: 1fr;
@@ -452,11 +495,11 @@ export default {
   }
   
   .comparison-title {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   
   .comparison-description {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
   
   .comparison-image-container {
@@ -469,7 +512,53 @@ export default {
   }
   
   .modal-image-group img {
-    height: 150px;
+    height: 250px;
+  }
+  
+  .image-description {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+  
+  .modal-description {
+    font-size: 1rem;
+  }
+}
+
+/* Dispositivos móveis pequenos */
+@media (max-width: 480px) {
+  .comparison-grid {
+    gap: 20px;
+  }
+  
+  .comparison-item {
+    padding: 18px;
+  }
+  
+  .comparison-title {
+    font-size: 1.3rem;
+  }
+  
+  .comparison-description {
+    font-size: 0.9rem;
+  }
+  
+  .comparison-image-container {
+    height: 180px;
+  }
+  
+  .modal-content {
+    padding: 20px;
+    margin: 10px;
+    max-height: 90vh;
+  }
+  
+  .modal-title {
+    font-size: 1.6rem;
+  }
+  
+  .modal-image-group img {
+    height: 200px;
   }
   
   .image-description {
@@ -478,13 +567,21 @@ export default {
   }
   
   .modal-description {
-    font-size: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .btn-small {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+    display: block;
   }
 }
 
-@media (max-width: 480px) {
+/* Dispositivos muito pequenos */
+@media (max-width: 360px) {
   .comparison-grid {
-    gap: 20px;
+    gap: 15px;
   }
   
   .comparison-item {
@@ -500,20 +597,20 @@ export default {
   }
   
   .comparison-image-container {
-    height: 150px;
+    height: 160px;
   }
   
   .modal-content {
     padding: 15px;
-    margin: 10px;
+    margin: 5px;
   }
   
   .modal-title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
   
   .modal-image-group img {
-    height: 120px;
+    height: 180px;
   }
   
   .image-description {
@@ -523,6 +620,21 @@ export default {
   
   .modal-description {
     font-size: 0.9rem;
+  }
+}
+
+/* Orientação landscape em mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .comparison-image-container {
+    height: 120px;
+  }
+  
+  .modal-image-group img {
+    height: 150px;
+  }
+  
+  .modal-content {
+    max-height: 95vh;
   }
 }
 </style>

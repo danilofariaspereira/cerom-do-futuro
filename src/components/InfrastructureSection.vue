@@ -27,6 +27,7 @@
               :src="item.image" 
               :alt="item.title"
               class="card-image"
+              onerror="this.onerror=null;this.src='/images/placeholder.svg'"
             >
             <div class="image-overlay" :class="{ 'active': activeCard === index }">
               <div class="overlay-content">
@@ -103,29 +104,6 @@
         </div>
       </div>
       
-      <!-- Timeline de evolução -->
-      <div class="evolution-timeline animate-on-scroll">
-        <h3 class="timeline-title">Evolução da Infraestrutura</h3>
-        <div class="timeline-container">
-          <div 
-            v-for="(phase, index) in evolutionPhases" 
-            :key="index"
-            class="timeline-phase"
-            :class="{ 'active': activePhase === index }"
-            @click="setActivePhase(index)"
-          >
-            <div class="phase-marker">
-              <div class="marker-dot"></div>
-              <div class="marker-line"></div>
-            </div>
-            <div class="phase-content">
-              <div class="phase-year">{{ phase.year }}</div>
-              <div class="phase-title">{{ phase.title }}</div>
-              <div class="phase-description">{{ phase.description }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
       
       <!-- Modal de detalhes -->
       <div 
@@ -138,7 +116,7 @@
           
           <div class="modal-header">
             <div class="modal-image">
-              <img :src="selectedInfrastructure.image" :alt="selectedInfrastructure.title">
+              <img :src="selectedInfrastructure.image" :alt="selectedInfrastructure.title" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
             </div>
             <div class="modal-info">
               <h3 class="modal-title">{{ selectedInfrastructure.title }}</h3>
@@ -190,7 +168,6 @@ export default {
   data() {
     return {
       activeCard: null,
-      activePhase: 0,
       activeAccordion: null,
       selectedInfrastructure: null,
       infrastructureItems: [
@@ -198,7 +175,7 @@ export default {
           title: 'Laboratório de Realidade Virtual',
           subtitle: 'Imersão Total no Aprendizado',
           description: 'Espaço equipado com tecnologia VR de última geração para experiências educacionais imersivas.',
-          image: '/images/lab-vr-futuro.jpg',
+          image: '/images/sala-do-futuro-de-informatica.jpeg',
           icon: '🥽',
           features: [
             'Headsets VR de alta resolução',
@@ -225,7 +202,7 @@ export default {
           title: 'Biblioteca Digital Inteligente',
           subtitle: 'Conhecimento ao Alcance dos Dedos',
           description: 'Biblioteca equipada com IA para pesquisa instantânea e recomendações personalizadas.',
-          image: '/images/biblioteca-digital.jpg',
+          image: '/images/biblioteca.png',
           icon: '📚',
           features: [
             'IA para pesquisa avançada',
@@ -252,7 +229,7 @@ export default {
           title: 'Quadra Esportiva Inteligente',
           subtitle: 'Performance e Saúde Monitoradas',
           description: 'Quadra com sensores biométricos e IA para otimização de treinos e prevenção de lesões.',
-          image: '/images/quadra-inteligente.jpg',
+          image: '/images/quadra do futuro.jpeg',
           icon: '🏃',
           features: [
             'Sensores biométricos integrados',
@@ -279,7 +256,7 @@ export default {
           title: 'Sala de Aula Adaptativa',
           subtitle: 'Ambiente que se Molda ao Aprendizado',
           description: 'Sala com mobiliário inteligente e sistemas de iluminação que se adaptam às necessidades dos alunos.',
-          image: '/images/sala-adaptativa.jpg',
+          image: '/images/sala-do-futuro.jpeg',
           icon: '🎓',
           features: [
             'Mobiliário inteligente ajustável',
@@ -302,38 +279,6 @@ export default {
             'Acessibilidade universal'
           ]
         }
-      ],
-      evolutionPhases: [
-        {
-          year: '2024',
-          title: 'Fundação Digital',
-          description: 'Implementação das primeiras tecnologias digitais básicas'
-        },
-        {
-          year: '2029',
-          title: 'Integração IA',
-          description: 'Introdução de sistemas de inteligência artificial educacional'
-        },
-        {
-          year: '2034',
-          title: 'Realidade Imersiva',
-          description: 'Adoção massiva de VR e AR para experiências de aprendizado'
-        },
-        {
-          year: '2039',
-          title: 'Ambientes Adaptativos',
-          description: 'Espaços físicos que se moldam às necessidades dos alunos'
-        },
-        {
-          year: '2044',
-          title: 'Conectividade Total',
-          description: 'Integração completa entre mundo físico e digital'
-        },
-        {
-          year: '2074',
-          title: 'Escola do Futuro',
-          description: 'Visão completa da escola Seron em 50 anos'
-        }
       ]
     }
   },
@@ -346,9 +291,6 @@ export default {
       this.activeCard = null
     },
     
-    setActivePhase(index) {
-      this.activePhase = index
-    },
     
     toggleAccordion(index) {
       this.activeAccordion = this.activeAccordion === index ? null : index
@@ -374,6 +316,27 @@ export default {
 <style scoped>
 .infrastructure-section {
   background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(0, 255, 255, 0.05) 100%);
+  padding: 80px 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-family: var(--font-futuristic);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .infrastructure-grid {
@@ -752,9 +715,9 @@ export default {
   background: var(--card-bg);
   border-radius: 20px;
   padding: 30px;
-  max-width: 800px;
-  width: 90%;
-  max-height: 80vh;
+  max-width: 720px;
+  width: 95%;
+  max-height: 85vh;
   overflow-y: auto;
   border: 1px solid rgba(0, 212, 255, 0.3);
   position: relative;
@@ -786,8 +749,8 @@ export default {
 }
 
 .modal-image img {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 15px;
   object-fit: cover;
   border: 3px solid var(--primary-blue);
@@ -879,7 +842,25 @@ export default {
   }
 }
 
-/* Responsividade */
+/* Responsividade melhorada */
+/* Tablets e dispositivos médios */
+@media (max-width: 1024px) {
+  .infrastructure-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+  }
+  
+  .card-image-container {
+    height: 220px;
+  }
+  
+  .resources-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+  }
+}
+
+/* Tablets pequenos e dispositivos móveis grandes */
 @media (max-width: 768px) {
   .infrastructure-grid {
     grid-template-columns: 1fr;
@@ -887,15 +868,19 @@ export default {
   }
   
   .infrastructure-card {
-    padding: 20px;
+    padding: 25px;
   }
   
   .card-title {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   
   .card-description {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+  }
+  
+  .card-image-container {
+    height: 200px;
   }
   
   .timeline-container::before {
@@ -913,10 +898,91 @@ export default {
   .modal-header {
     flex-direction: column;
     text-align: center;
+    gap: 15px;
+  }
+  
+  .modal-content {
+    padding: 25px;
+    margin: 15px;
   }
   
   .resources-grid {
     grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .resource-item {
+    padding: 15px;
+  }
+  
+  .resource-icon {
+    font-size: 1.8rem;
+  }
+  
+  .accordion-header {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+  
+  .accordion-content.active {
+    padding: 18px;
+  }
+}
+
+/* Dispositivos móveis pequenos */
+@media (max-width: 480px) {
+  .infrastructure-grid {
+    gap: 20px;
+  }
+  
+  .infrastructure-card {
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-size: 1.3rem;
+  }
+  
+  .card-description {
+    font-size: 0.9rem;
+  }
+  
+  .card-image-container {
+    height: 180px;
+  }
+  
+  .phase-content {
+    margin-left: 30px;
+  }
+  
+  .modal-content {
+    padding: 20px;
+    margin: 10px;
+    max-height: 90vh;
+  }
+  
+  .modal-title {
+    font-size: 1.6rem;
+  }
+  
+  .modal-header {
+    gap: 10px;
+  }
+  
+  .resource-item {
+    padding: 12px;
+  }
+  
+  .resource-icon {
+    font-size: 1.5rem;
+  }
+  
+  .resource-info h5 {
+    font-size: 0.95rem;
+  }
+  
+  .resource-info p {
+    font-size: 0.85rem;
   }
   
   .accordion-header {
@@ -927,15 +993,32 @@ export default {
   .accordion-content.active {
     padding: 15px;
   }
+  
+  .feature-item {
+    font-size: 0.85rem;
+  }
+  
+  .tech-tag {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+  
+  .btn-small {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+    display: block;
+  }
 }
 
-@media (max-width: 480px) {
+/* Dispositivos muito pequenos */
+@media (max-width: 360px) {
   .infrastructure-grid {
-    gap: 20px;
+    gap: 15px;
   }
   
   .infrastructure-card {
-    padding: 15px;
+    padding: 18px;
   }
   
   .card-title {
@@ -946,13 +1029,33 @@ export default {
     font-size: 0.85rem;
   }
   
-  .phase-content {
-    margin-left: 30px;
+  .card-image-container {
+    height: 160px;
   }
   
   .modal-content {
     padding: 15px;
-    margin: 10px;
+    margin: 8px;
+  }
+  
+  .modal-title {
+    font-size: 1.4rem;
+  }
+  
+  .resource-item {
+    padding: 10px;
+  }
+  
+  .resource-icon {
+    font-size: 1.3rem;
+  }
+  
+  .resource-info h5 {
+    font-size: 0.9rem;
+  }
+  
+  .resource-info p {
+    font-size: 0.8rem;
   }
   
   .accordion-header {
@@ -971,6 +1074,31 @@ export default {
   .tech-tag {
     font-size: 0.7rem;
     padding: 4px 8px;
+  }
+}
+
+/* Orientação landscape em mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .infrastructure-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .infrastructure-card {
+    padding: 15px;
+  }
+  
+  .card-image-container {
+    height: 120px;
+  }
+  
+  .modal-content {
+    max-height: 95vh;
+  }
+  
+  .resources-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 }
 </style>
