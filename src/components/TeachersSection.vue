@@ -95,7 +95,7 @@ export default {
   name: 'TeachersSection',
   data() {
     return {
-      totalTeachers: 10,
+      totalTeachers: 11,
       totalClasses: 42,
       totalStudents: 2100,
       selectedTeacher: null,
@@ -169,6 +169,13 @@ export default {
           photo: '/images/carine-ciencias.png',
           futureVision: 'No futuro, usaremos laboratórios virtuais onde os alunos poderão realizar experimentos em realidade aumentada, explorando reações químicas e fenômenos físicos de forma segura e interativa.',
           joke: 'Por que a professora de ciências sempre tem uma bata branca? Porque ela quer que todos os experimentos sejam "limpos" e organizados! 🧪'
+        },
+        {
+          name: 'Gabriela',
+          subject: 'História',
+          photo: '/images/gabriela-ciencias.png',
+          futureVision: 'No futuro, usaremos realidade virtual para "viajar no tempo", permitindo que os alunos vivenciem eventos históricos importantes e interajam com personagens do passado de forma imersiva.',
+          joke: 'Por que a professora de história nunca se perde? Porque ela sempre sabe onde está no "mapa do tempo"! ⏰'
         }
       ]
     }
