@@ -95,7 +95,7 @@ export default {
   name: 'TeachersSection',
   data() {
     return {
-      totalTeachers: 9,
+      totalTeachers: 10,
       totalClasses: 42,
       totalStudents: 2100,
       selectedTeacher: null,
@@ -162,6 +162,13 @@ export default {
           photo: '/images/livia-artes.jpeg',
           futureVision: 'No futuro, usaremos pincéis digitais e esculturas em 3D, criando obras de arte que poderão ser expostas em galerias virtuais e interagir com o público.',
           joke: 'Por que o artista nunca fica triste? Porque ele sempre pinta um sorriso no rosto! 🎨'
+        },
+        {
+          name: 'Carine',
+          subject: 'Ciências',
+          photo: '/images/carine-ciencias.png',
+          futureVision: 'No futuro, usaremos laboratórios virtuais onde os alunos poderão realizar experimentos em realidade aumentada, explorando reações químicas e fenômenos físicos de forma segura e interativa.',
+          joke: 'Por que a professora de ciências sempre tem uma bata branca? Porque ela quer que todos os experimentos sejam "limpos" e organizados! 🧪'
         }
       ]
     }
