@@ -54,53 +54,34 @@
         <div class="modal-content" @click.stop>
           <button class="modal-close" @click="closeModal">×</button>
           
-          <!-- Título do Modal -->
-          <div class="modal-title-section">
-            <h3 class="modal-title">{{ selectedTeacher.name }}</h3>
-            <p class="modal-subtitle">{{ selectedTeacher.subject }}</p>
+          <!-- Cabeçalho do Modal -->
+          <div class="modal-header">
+            <div class="teacher-photo-container">
+              <img 
+                :src="selectedTeacher.photo" 
+                :alt="selectedTeacher.name"
+                class="teacher-photo"
+                onerror="this.onerror=null;this.src='/images/placeholder.svg'"
+              >
+            </div>
+            <div class="teacher-info">
+              <h3 class="teacher-name">{{ selectedTeacher.name }}</h3>
+              <p class="teacher-subject">{{ selectedTeacher.subject }}</p>
+            </div>
           </div>
           
+          <!-- Corpo do Modal -->
           <div class="modal-body">
-            <!-- Seção Hoje -->
-            <div class="modal-section">
-              <h4 class="section-title">Hoje</h4>
-              <div class="modal-photo-container">
-                <img 
-                  :src="selectedTeacher.photo" 
-                  :alt="selectedTeacher.name"
-                  class="modal-photo"
-                  onerror="this.onerror=null;this.src='/images/placeholder.svg'"
-                >
-              </div>
-              <div class="feature-description">
-                <p>Professor tradicional com métodos convencionais de ensino</p>
-              </div>
-            </div>
-            
-            <!-- Seção Futuro -->
-            <div class="modal-section">
-              <h4 class="section-title">Futuro</h4>
-              <div class="modal-photo-container">
-                <img 
-                  :src="selectedTeacher.photo" 
-                  :alt="selectedTeacher.name"
-                  class="modal-photo"
-                  onerror="this.onerror=null;this.src='/images/placeholder.svg'"
-                >
-              </div>
-              <div class="feature-description">
-                <p>{{ selectedTeacher.futureVision }}</p>
-              </div>
-            </div>
-            
-            <!-- Descrição Detalhada -->
-            <div class="modal-description">
-              <h4>Descrição Detalhada</h4>
+            <!-- Visão de Futuro -->
+            <div class="future-vision">
+              <h4>🚀 Visão de Futuro</h4>
               <p>{{ selectedTeacher.futureVision }}</p>
-              <div class="teacher-joke">
-                <h5>Piada do Professor</h5>
-                <p>{{ selectedTeacher.joke }}</p>
-              </div>
+            </div>
+            
+            <!-- Piada do Professor -->
+            <div class="teacher-joke">
+              <h4>😄 Piada do Professor</h4>
+              <p>{{ selectedTeacher.joke }}</p>
             </div>
           </div>
         </div>
@@ -447,15 +428,21 @@ export default {
     overflow-y: auto;
   }
   
-  .modal-title-section {
+  .modal-header {
     padding: 20px 20px 15px;
+    gap: 15px;
   }
   
-  .modal-section {
-    padding: 20px 20px;
+  .teacher-photo {
+    width: 100px;
+    height: 100px;
   }
   
-  .modal-description {
+  .teacher-name {
+    font-size: 1.5rem;
+  }
+  
+  .modal-body {
     padding: 20px 20px 25px;
   }
   
@@ -487,16 +474,36 @@ export default {
     font-size: 1.3rem;
   }
   
-  .modal-title-section {
+  .modal-header {
     padding: 15px 15px 10px;
+    gap: 12px;
   }
   
-  .modal-section {
-    padding: 15px 15px;
+  .teacher-photo {
+    width: 80px;
+    height: 80px;
   }
   
-  .modal-description {
+  .teacher-name {
+    font-size: 1.3rem;
+  }
+  
+  .teacher-subject {
+    font-size: 1rem;
+  }
+  
+  .modal-body {
     padding: 15px 15px 20px;
+  }
+  
+  .future-vision h4,
+  .teacher-joke h4 {
+    font-size: 1.1rem;
+  }
+  
+  .future-vision p,
+  .teacher-joke p {
+    font-size: 0.9rem;
   }
 }
 
@@ -534,13 +541,34 @@ export default {
   transform: rotate(90deg);
 }
 
-.modal-title-section {
+.modal-header {
   padding: 30px 30px 20px;
   text-align: center;
   border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
-.modal-title {
+.teacher-photo-container {
+  text-align: center;
+}
+
+.teacher-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #00d4ff;
+  box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+}
+
+.teacher-info {
+  text-align: center;
+}
+
+.teacher-name {
   font-family: var(--font-futuristic);
   font-size: 1.8rem;
   font-weight: 700;
@@ -548,76 +576,39 @@ export default {
   margin-bottom: 8px;
 }
 
-.modal-subtitle {
+.teacher-subject {
   color: #00d4ff;
   font-size: 1.1rem;
   font-weight: 600;
 }
 
-.modal-section {
-  padding: 25px 30px;
-  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+.modal-body {
+  padding: 25px 30px 30px;
 }
 
-.section-title {
+.future-vision {
+  margin-bottom: 25px;
+}
+
+.future-vision h4 {
   font-family: var(--font-futuristic);
   font-size: 1.3rem;
   font-weight: 600;
   color: #00d4ff;
   margin-bottom: 15px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.modal-photo-container {
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-.modal-photo {
-  width: 150px;
-  height: 150px;
-  border-radius: 15px;
-  object-fit: cover;
-  border: 2px solid #00d4ff;
-  box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
-}
-
-.feature-description {
+.future-vision p {
+  color: #ffffff;
+  line-height: 1.6;
+  font-size: 0.95rem;
   background: rgba(0, 212, 255, 0.1);
   border: 1px solid #00d4ff;
   border-radius: 10px;
   padding: 15px;
-  margin-top: 15px;
-}
-
-.feature-description p {
-  color: #ffffff;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.modal-body {
-  padding: 0;
-}
-
-.modal-description {
-  padding: 25px 30px 30px;
-}
-
-.modal-description h4 {
-  font-family: var(--font-futuristic);
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #00d4ff;
-  margin-bottom: 15px;
-}
-
-.modal-description p {
-  color: #ffffff;
-  line-height: 1.6;
-  font-size: 0.95rem;
-  margin-bottom: 20px;
 }
 
 .teacher-joke {
@@ -625,19 +616,22 @@ export default {
   border: 1px solid #00d4ff;
   border-radius: 10px;
   padding: 20px;
-  margin-top: 20px;
 }
 
-.teacher-joke h5 {
-  color: #00d4ff;
-  font-size: 1.1rem;
+.teacher-joke h4 {
+  font-family: var(--font-futuristic);
+  font-size: 1.3rem;
   font-weight: 600;
-  margin-bottom: 10px;
+  color: #00d4ff;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .teacher-joke p {
   color: #ffffff;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   line-height: 1.5;
   font-style: italic;
   margin: 0;
@@ -872,16 +866,36 @@ export default {
     font-size: 0.9rem;
   }
   
-  .modal-title-section {
+  .modal-header {
     padding: 10px 10px 8px;
+    gap: 10px;
   }
   
-  .modal-section {
-    padding: 10px 10px;
+  .teacher-photo {
+    width: 70px;
+    height: 70px;
   }
   
-  .modal-description {
+  .teacher-name {
+    font-size: 1.2rem;
+  }
+  
+  .teacher-subject {
+    font-size: 0.9rem;
+  }
+  
+  .modal-body {
     padding: 10px 10px 15px;
+  }
+  
+  .future-vision h4,
+  .teacher-joke h4 {
+    font-size: 1rem;
+  }
+  
+  .future-vision p,
+  .teacher-joke p {
+    font-size: 0.85rem;
   }
 }
 
