@@ -36,8 +36,7 @@
                 <div class="detail-icon">🌐</div>
                 <div class="detail-content">
                   <h4>Website</h4>
-                  <p>www.escolaseron.com.br</p>
-                  <p>www.serondo-futuro.com</p>
+                  <p>cerom-do-futuro.netlify.app</p>
                 </div>
               </div>
             </div>
