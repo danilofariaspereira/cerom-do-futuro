@@ -95,7 +95,7 @@ export default {
   name: 'TeachersSection',
   data() {
     return {
-      totalTeachers: 11,
+      totalTeachers: 12,
       totalClasses: 42,
       totalStudents: 2100,
       selectedTeacher: null,
@@ -176,6 +176,13 @@ export default {
           photo: '/images/gabriela-ciencias.png',
           futureVision: 'No futuro, usaremos realidade virtual para "viajar no tempo", permitindo que os alunos vivenciem eventos históricos importantes e interajam com personagens do passado de forma imersiva.',
           joke: 'Por que a professora de história nunca se perde? Porque ela sempre sabe onde está no "mapa do tempo"! ⏰'
+        },
+        {
+          name: 'Luana',
+          subject: 'Português',
+          photo: '/images/luana-português.jpg',
+          futureVision: 'No futuro, usaremos inteligência artificial para personalizar o ensino de português, criando exercícios adaptativos que se ajustam ao nível de cada aluno e promovem o desenvolvimento da escrita criativa.',
+          joke: 'Por que a professora de português sempre tem uma caneta azul? Porque ela quer que todos os textos tenham "cor" e personalidade! ✍️'
         }
       ]
     }
