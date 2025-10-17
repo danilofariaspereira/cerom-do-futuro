@@ -18,6 +18,9 @@
     <!-- Contato e Localização -->
     <ContactSection />
     
+    <!-- Adriana - Orientadora IA -->
+    <AdrianaSection />
+    
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
@@ -43,6 +46,7 @@ import JarvasSection from './components/JarvasSection.vue'
 import TeachersSection from './components/TeachersSection.vue'
 import CafeteriaSection from './components/CafeteriaSection.vue'
 import ContactSection from './components/ContactSection.vue'
+import AdrianaSection from './components/AdrianaSection.vue'
 
 export default {
   name: 'App',
@@ -52,7 +56,8 @@ export default {
     JarvasSection,
     TeachersSection,
     CafeteriaSection,
-    ContactSection
+    ContactSection,
+    AdrianaSection
   },
   mounted() {
     // Adicionar efeitos de scroll suave
