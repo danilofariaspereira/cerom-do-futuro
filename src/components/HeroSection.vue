@@ -12,8 +12,7 @@
         <div class="bg-overlay"></div>
       </div>
       
-      <!-- Canvas para partículas e linhas (efeito tipo DeckCode) -->
-      <canvas ref="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
+      <!-- Canvas removido - efeito desabilitado -->
     </div>
     
     <!-- Conteúdo principal -->
@@ -91,12 +90,8 @@ export default {
   mounted() {
     // Adicionar efeitos de parallax
     this.initParallaxEffects()
-    // Inicializar canvas de partículas
-    this.initParticleCanvas()
   },
   beforeUnmount() {
-    // limpar animações e listeners do canvas
-    this.destroyParticleCanvas()
     window.removeEventListener('scroll', this._parallaxHandler)
   },
   methods: {
@@ -123,145 +118,6 @@ export default {
       }
       window.addEventListener('scroll', this._parallaxHandler)
     }
-    ,
-
-    /* --------------------------- Canvas Particles --------------------------- */
-    initParticleCanvas() {
-      const canvas = this.$refs.heroCanvas
-      if (!canvas) return
-
-      this._ctx = canvas.getContext('2d')
-      this._particles = []
-      this._mouse = { x: null, y: null }
-      this._animationId = null
-
-      const resize = () => {
-        const dpr = window.devicePixelRatio || 1
-        canvas.width = Math.floor(canvas.clientWidth * dpr)
-        canvas.height = Math.floor(canvas.clientHeight * dpr)
-        this._ctx.scale(dpr, dpr)
-      }
-
-      // make canvas cover container
-      const parent = canvas.parentElement
-      canvas.style.width = '100%'
-      canvas.style.height = '100%'
-
-      resize()
-      window.addEventListener('resize', resize)
-      this._particleResize = resize
-
-      // create a reasonable number of particles proportional to area (denser network look)
-      const areaPx = canvas.clientWidth * canvas.clientHeight
-      const count = Math.max(60, Math.floor(areaPx / 8000))
-
-      for (let i = 0; i < count; i++) {
-        this._particles.push(this._createParticle(canvas))
-      }
-
-      // mouse events
-      const onMove = (e) => {
-        const rect = canvas.getBoundingClientRect()
-        this._mouse.x = e.clientX - rect.left
-        this._mouse.y = e.clientY - rect.top
-      }
-      const onLeave = () => { this._mouse.x = null; this._mouse.y = null }
-
-      canvas.addEventListener('mousemove', onMove)
-      canvas.addEventListener('mouseleave', onLeave)
-
-      this._particleListeners = { onMove, onLeave }
-
-      const loop = () => {
-        this._animationId = requestAnimationFrame(loop)
-        this._drawParticles(canvas)
-      }
-      loop()
-    },
-
-    destroyParticleCanvas() {
-      const canvas = this.$refs.heroCanvas
-      if (!canvas) return
-      if (this._animationId) cancelAnimationFrame(this._animationId)
-      if (this._particleResize) window.removeEventListener('resize', this._particleResize)
-      if (this._particleListeners) {
-        canvas.removeEventListener('mousemove', this._particleListeners.onMove)
-        canvas.removeEventListener('mouseleave', this._particleListeners.onLeave)
-      }
-      this._particles = []
-      this._ctx = null
-    },
-
-    _createParticle(canvas) {
-      const x = Math.random() * canvas.clientWidth
-      const y = Math.random() * canvas.clientHeight
-      const vx = (Math.random() - 0.5) * 0.6
-      const vy = (Math.random() - 0.5) * 0.6
-      const r = 1 + Math.random() * 2
-      const hue = 190 + Math.random() * 60 // bluish
-      return { x, y, vx, vy, r, hue }
-    },
-
-    _drawParticles(canvas) {
-      const ctx = this._ctx
-      if (!ctx) return
-      const w = canvas.clientWidth
-      const h = canvas.clientHeight
-
-      // clear with slight transparent fill to produce trailing
-      ctx.clearRect(0, 0, w, h)
-
-      // update and draw particles
-      for (let p of this._particles) {
-        p.x += p.vx
-        p.y += p.vy
-
-        // bounce
-        if (p.x < 0 || p.x > w) p.vx *= -1
-        if (p.y < 0 || p.y > h) p.vy *= -1
-
-        // mouse interaction - gentle attraction
-        if (this._mouse.x != null) {
-          const dx = this._mouse.x - p.x
-          const dy = this._mouse.y - p.y
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < 120) {
-            p.vx += dx / 10000
-            p.vy += dy / 10000
-          }
-        }
-
-        // draw (small glowing node)
-        ctx.save()
-        ctx.beginPath()
-        ctx.fillStyle = `rgba(180,220,255,0.95)`
-        ctx.shadowColor = `rgba(120,200,255,0.15)`
-        ctx.shadowBlur = 8
-        ctx.arc(p.x, p.y, p.r + 0.6, 0, Math.PI * 2)
-        ctx.fill()
-        ctx.restore()
-      }
-      // connect lines (network look)
-      const maxDist = 160
-      for (let i = 0; i < this._particles.length; i++) {
-        for (let j = i + 1; j < this._particles.length; j++) {
-          const a = this._particles[i]
-          const b = this._particles[j]
-          const dx = a.x - b.x
-          const dy = a.y - b.y
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < maxDist) {
-            const alpha = 1 - dist / maxDist
-            ctx.beginPath()
-            ctx.strokeStyle = `rgba(140,200,255,${alpha * 0.9})`
-            ctx.lineWidth = 1
-            ctx.moveTo(a.x, a.y)
-            ctx.lineTo(b.x, b.y)
-            ctx.stroke()
-          }
-        }
-      }
-    }
   }
 }
 </script>
@@ -275,6 +131,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
 }
 
 .video-container {
@@ -286,15 +145,7 @@ export default {
   z-index: 1;
 }
 
-.hero-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: auto; /* allow mouse interaction for subtle attraction */
-  z-index: 1.5; /* sits above video but below overlay (overlay is z-index:2) */
-}
+/* Canvas removido - estilo desabilitado */
 
 .hero-background {
   position: relative;
@@ -330,13 +181,15 @@ export default {
   position: relative;
   z-index: 3;
   text-align: center;
-  max-width: 800px;
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 /* Painel de vidro (frosted glass) ao redor do conteúdo textual */
 .hero-text-panel {
-  display: inline-block;
+  display: block;
   padding: 34px 46px 46px 46px;
   border-radius: 20px;
   background: linear-gradient(180deg, rgba(20,30,40,0.45), rgba(10,18,28,0.28));
@@ -345,6 +198,9 @@ export default {
   backdrop-filter: blur(12px) saturate(120%);
   -webkit-backdrop-filter: blur(12px) saturate(120%);
   z-index: 3;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 @media (max-width: 768px) {

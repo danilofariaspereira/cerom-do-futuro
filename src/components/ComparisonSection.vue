@@ -75,24 +75,36 @@
         <div class="modal-content" @click.stop>
           <button class="modal-close" @click="closeModal">×</button>
           
-          <div class="modal-header">
+          <!-- Título do Modal -->
+          <div class="modal-title-section">
             <h3 class="modal-title">{{ selectedItem.title }}</h3>
+            <p class="modal-subtitle">{{ selectedItem.description }}</p>
           </div>
           
           <div class="modal-body">
-            <div class="modal-images">
-              <div class="modal-image-group">
-                <h4>Hoje</h4>
-                <img :src="selectedItem.currentImage" :alt="`${selectedItem.title} - Atual`" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
-                <p class="image-description">{{ selectedItem.currentFeatures }}</p>
+            <!-- Seção Hoje -->
+            <div class="modal-section">
+              <h4 class="section-title">Hoje</h4>
+              <div class="modal-image-container">
+                <img :src="selectedItem.currentImage" :alt="`${selectedItem.title} - Atual`" class="modal-image" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
               </div>
-              <div class="modal-image-group">
-                <h4>Futuro</h4>
-                <img :src="selectedItem.futureImage" :alt="`${selectedItem.title} - Futuro`" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
-                <p class="image-description">{{ selectedItem.futureFeatures }}</p>
+              <div class="feature-description">
+                <p>{{ selectedItem.currentFeatures }}</p>
               </div>
             </div>
             
+            <!-- Seção Futuro -->
+            <div class="modal-section">
+              <h4 class="section-title">Futuro</h4>
+              <div class="modal-image-container">
+                <img :src="selectedItem.futureImage" :alt="`${selectedItem.title} - Futuro`" class="modal-image" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
+              </div>
+              <div class="feature-description">
+                <p>{{ selectedItem.futureFeatures }}</p>
+              </div>
+            </div>
+            
+            <!-- Descrição Detalhada -->
             <div class="modal-description">
               <h4>Descrição Detalhada</h4>
               <p>{{ selectedItem.detailedDescription }}</p>
@@ -361,65 +373,213 @@ export default {
   font-size: 0.9rem;
 }
 
-/* Modal */
+/* Modal - Tema Escuro */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(15px);
 }
 
 .modal-content {
-  background: var(--card-bg);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   border-radius: 20px;
-  padding: 30px;
-  max-width: 720px;
-  width: 95%;
-  max-height: 85vh;
+  padding: 0;
+  max-width: 900px;
+  width: 90%;
+  max-height: 90vh;
   overflow-y: auto;
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border: 2px solid #00d4ff;
+  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
   position: relative;
+  margin: 0 auto;
+}
+
+/* Mobile first - modais menores e sem box-shadow */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 0;
+    margin: 15px;
+    max-width: 95%;
+    width: 95%;
+    max-height: 95vh;
+    border-radius: 20px;
+    overflow-y: auto;
+  }
+  
+  .modal-title-section {
+    padding: 20px 20px 15px;
+  }
+  
+  .modal-section {
+    padding: 20px 20px;
+  }
+  
+  .modal-description {
+    padding: 20px 20px 25px;
+  }
+  
+  .comparison-item {
+    box-shadow: none !important;
+  }
+  
+  .comparison-item:hover {
+    box-shadow: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 0;
+    margin: 8px;
+    max-width: 98%;
+    width: 98%;
+    max-height: 95vh;
+    border-radius: 15px;
+    overflow-y: auto;
+  }
+  
+  .modal-title-section {
+    padding: 15px 15px 10px;
+  }
+  
+  .modal-section {
+    padding: 15px 15px;
+  }
+  
+  .modal-description {
+    padding: 15px 15px 20px;
+  }
+  
+  .modal-image {
+    height: 150px;
+  }
+  
+  .modal-title {
+    font-size: 1.4rem;
+  }
 }
 
 .modal-close {
   position: absolute;
   top: 15px;
   right: 20px;
-  background: none;
+  background: transparent;
   border: none;
-  color: var(--text-secondary);
+  color: #00d4ff;
   font-size: 2rem;
   cursor: pointer;
   transition: var(--transition-smooth);
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-close:hover {
-  color: var(--primary-blue);
+  color: #ffffff;
+  transform: rotate(90deg);
 }
 
-.modal-header {
-  margin-bottom: 25px;
+.modal-title-section {
+  padding: 30px 30px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.3);
 }
 
 .modal-title {
   font-family: var(--font-futuristic);
-  font-size: 2rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.modal-subtitle {
+  color: #00d4ff;
+  font-size: 1.1rem;
   font-weight: 600;
+}
+
+.modal-body {
+  padding: 0;
+}
+
+.modal-section {
+  padding: 25px 30px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.section-title {
+  font-family: var(--font-futuristic);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #00d4ff;
+  margin-bottom: 15px;
   text-align: center;
-  color: var(--text-primary);
+}
+
+.modal-image-container {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.modal-image {
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  border: 2px solid #00d4ff;
+  box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+}
+
+.feature-description {
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid #00d4ff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.feature-description p {
+  color: #ffffff;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.modal-description {
+  padding: 25px 30px 30px;
+}
+
+.modal-description h4 {
+  font-family: var(--font-futuristic);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #00d4ff;
+  margin-bottom: 15px;
+}
+
+.modal-description p {
+  color: #ffffff;
+  line-height: 1.6;
+  font-size: 0.95rem;
 }
 
 .modal-images {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   margin-bottom: 25px;
 }
 
@@ -436,7 +596,8 @@ export default {
 
 .modal-image-group img {
   width: 100%;
-  height: 300px;
+  max-width: 400px;
+  height: 250px;
   object-fit: cover;
   border-radius: 10px;
   border: 2px solid rgba(0, 212, 255, 0.3);
@@ -444,8 +605,30 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
   .modal-images {
     grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .modal-content {
+    padding: 20px;
+    margin: 10px;
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 95%;
+  }
+  
+  .modal-title {
+    font-size: 1.6rem;
+  }
+  
+  .modal-image-group img {
+    height: 200px;
   }
 }
 

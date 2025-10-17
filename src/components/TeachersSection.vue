@@ -54,33 +54,53 @@
         <div class="modal-content" @click.stop>
           <button class="modal-close" @click="closeModal">×</button>
           
-          <div class="modal-header">
-            <div class="modal-photo-container">
-              <img 
-                :src="selectedTeacher.photo" 
-                :alt="selectedTeacher.name"
-                class="modal-photo"
-                onerror="this.onerror=null;this.src='/images/placeholder.svg'"
-              >
-            </div>
-            <div class="modal-info">
-              <h3 class="modal-name">{{ selectedTeacher.name }}</h3>
-              <p class="modal-subject">{{ selectedTeacher.subject }}</p>
-            </div>
+          <!-- Título do Modal -->
+          <div class="modal-title-section">
+            <h3 class="modal-title">{{ selectedTeacher.name }}</h3>
+            <p class="modal-subtitle">{{ selectedTeacher.subject }}</p>
           </div>
           
           <div class="modal-body">
-            <div class="teacher-details">
-              <div class="detail-section">
-                <h4>🚀 Visão de Futuro</h4>
-              <p>{{ selectedTeacher.futureVision }}</p>
+            <!-- Seção Hoje -->
+            <div class="modal-section">
+              <h4 class="section-title">Hoje</h4>
+              <div class="modal-photo-container">
+                <img 
+                  :src="selectedTeacher.photo" 
+                  :alt="selectedTeacher.name"
+                  class="modal-photo"
+                  onerror="this.onerror=null;this.src='/images/placeholder.svg'"
+                >
+              </div>
+              <div class="feature-description">
+                <p>Professor tradicional com métodos convencionais de ensino</p>
               </div>
             </div>
             
-            <div class="teacher-joke">
-              <div class="joke-icon">😄</div>
-              <h4>Piada do Professor</h4>
-              <p class="joke-text">{{ selectedTeacher.joke }}</p>
+            <!-- Seção Futuro -->
+            <div class="modal-section">
+              <h4 class="section-title">Futuro</h4>
+              <div class="modal-photo-container">
+                <img 
+                  :src="selectedTeacher.photo" 
+                  :alt="selectedTeacher.name"
+                  class="modal-photo"
+                  onerror="this.onerror=null;this.src='/images/placeholder.svg'"
+                >
+              </div>
+              <div class="feature-description">
+                <p>{{ selectedTeacher.futureVision }}</p>
+              </div>
+            </div>
+            
+            <!-- Descrição Detalhada -->
+            <div class="modal-description">
+              <h4>Descrição Detalhada</h4>
+              <p>{{ selectedTeacher.futureVision }}</p>
+              <div class="teacher-joke">
+                <h5>Piada do Professor</h5>
+                <p>{{ selectedTeacher.joke }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -94,7 +114,7 @@ export default {
   name: 'TeachersSection',
   data() {
     return {
-      totalTeachers: 16,
+      totalTeachers: 9,
       totalClasses: 42,
       totalStudents: 2100,
       selectedTeacher: null,
@@ -138,29 +158,29 @@ export default {
           name: 'Vitor',
           subject: 'Educação Física',
           photo: '/images/vitor-educacao-fisica.png',
-          futureVision: 'Imagino um futuro onde usamos sensores biométricos e IA para personalizar treinos, garantindo que cada aluno atinja seu potencial máximo de forma segura.',
-          joke: 'Por que o professor de educação física sempre tem energia? Porque ele corre atrás dos seus sonhos todos os dias! 🏃‍♂️'
-        },
-        {
-          name: 'Alcir',
-          subject: 'Geografia',
-          photo: '/images/alcir-geografia.png',
-          futureVision: 'No futuro, usaremos realidade virtual para "viajar" pelo mundo, permitindo que os alunos explorem diferentes países e culturas sem sair da sala de aula.',
-          joke: 'Por que o professor de geografia sempre está animado? Porque ele conhece todos os cantos do mundo e quer compartilhar essa alegria! 🌍'
+          futureVision: 'No futuro, usaremos sensores de movimento e realidade aumentada para criar exercícios personalizados e jogos educativos que tornam a educação física mais divertida e eficaz.',
+          joke: 'Por que o professor de educação física nunca fica doente? Porque ele tem muita "resistência"! 💪'
         },
         {
           name: 'Gabriel',
           subject: 'Geografia',
           photo: '/images/gabriel-geografia.png',
-          futureVision: 'Acredito que no futuro teremos mapas interativos em 3D que mostram mudanças climáticas em tempo real, ensinando geografia de forma dinâmica e atual.',
-          joke: 'Por que o professor de geografia adora o planeta Terra? Porque é o único lugar onde podemos aprender geografia de verdade! 🌎'
+          futureVision: 'Imagino um futuro onde os alunos exploram o mundo através de mapas interativos em 3D, podendo "voar" sobre países e explorar diferentes culturas em realidade virtual.',
+          joke: 'Por que o professor de geografia é sempre pontual? Porque ele nunca perde a "orientação"! 🗺️'
+        },
+        {
+          name: 'Alcir',
+          subject: 'Geografia',
+          photo: '/images/alcir-geografia.png',
+          futureVision: 'Acredito que no futuro teremos simuladores climáticos e de ecossistemas que permitem aos alunos experimentar diferentes ambientes e entender melhor a geografia do planeta.',
+          joke: 'Por que o professor de geografia adora escalar montanhas? Porque ele sempre quer chegar ao "topo" do conhecimento! ⛰️'
         },
         {
           name: 'Livia',
           subject: 'Artes',
           photo: '/images/livia-artes.jpeg',
-          futureVision: 'No futuro, usaremos realidade aumentada para criar arte digital interativa, permitindo que os alunos "pintem" no ar e vejam suas obras ganharem vida.',
-          joke: 'Por que o professor de artes sempre está colorido? Porque ele pinta o mundo com alegria e criatividade! 🌈'
+          futureVision: 'No futuro, usaremos pincéis digitais e esculturas em 3D, criando obras de arte que poderão ser expostas em galerias virtuais e interagir com o público.',
+          joke: 'Por que o artista nunca fica triste? Porque ele sempre pinta um sorriso no rosto! 🎨'
         }
       ]
     }
@@ -386,33 +406,98 @@ export default {
   transform: translateX(3px);
 }
 
-/* Modal Styles */
+/* Modal Styles - Tema Escuro */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   padding: 20px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
 }
 
 .modal-content {
-  background: var(--card-bg);
-  border-radius: 25px;
-  max-width: 600px;
-  width: 100%;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 20px;
+  max-width: 800px;
+  width: 90%;
   max-height: 90vh;
   overflow-y: auto;
-  border: 1px solid rgba(0, 212, 255, 0.3);
-  backdrop-filter: blur(20px);
+  border: 2px solid #00d4ff;
+  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
   position: relative;
   animation: modalSlideIn 0.3s ease-out;
+  margin: 0 auto;
+}
+
+/* Mobile first - modais menores e sem box-shadow */
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 95%;
+    width: 95%;
+    max-height: 95vh;
+    margin: 15px;
+    border-radius: 20px;
+    overflow-y: auto;
+  }
+  
+  .modal-title-section {
+    padding: 20px 20px 15px;
+  }
+  
+  .modal-section {
+    padding: 20px 20px;
+  }
+  
+  .modal-description {
+    padding: 20px 20px 25px;
+  }
+  
+  .teacher-card {
+    box-shadow: none !important;
+  }
+  
+  .teacher-card:hover {
+    box-shadow: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    max-width: 98%;
+    width: 98%;
+    max-height: 95vh;
+    margin: 8px;
+    border-radius: 15px;
+    overflow-y: auto;
+  }
+  
+  .modal-photo {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .modal-name {
+    font-size: 1.3rem;
+  }
+  
+  .modal-title-section {
+    padding: 15px 15px 10px;
+  }
+  
+  .modal-section {
+    padding: 15px 15px;
+  }
+  
+  .modal-description {
+    padding: 15px 15px 20px;
+  }
 }
 
 @keyframes modalSlideIn {
@@ -428,111 +513,134 @@ export default {
 
 .modal-close {
   position: absolute;
-  top: 20px;
+  top: 15px;
   right: 20px;
-  background: rgba(255, 255, 255, 0.1);
+  background: transparent;
   border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  color: white;
-  font-size: 1.5rem;
+  color: #00d4ff;
+  font-size: 2rem;
   cursor: pointer;
   transition: var(--transition-smooth);
   z-index: 10;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-close:hover {
-  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
   transform: rotate(90deg);
 }
 
-.modal-header {
-  padding: 40px 40px 20px;
+.modal-title-section {
+  padding: 30px 30px 20px;
   text-align: center;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.modal-title {
+  font-family: var(--font-futuristic);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.modal-subtitle {
+  color: #00d4ff;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.modal-section {
+  padding: 25px 30px;
   border-bottom: 1px solid rgba(0, 212, 255, 0.2);
 }
 
+.section-title {
+  font-family: var(--font-futuristic);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #00d4ff;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
 .modal-photo-container {
-  margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 15px;
 }
 
 .modal-photo {
   width: 150px;
   height: 150px;
-  border-radius: 50%;
+  border-radius: 15px;
   object-fit: cover;
-  border: 5px solid rgba(0, 212, 255, 0.3);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 2px solid #00d4ff;
+  box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
 }
 
-.modal-name {
-  font-family: var(--font-futuristic);
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 8px;
+.feature-description {
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid #00d4ff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
 }
 
-.modal-subject {
-  color: var(--primary-color);
-  font-size: 1.1rem;
-  font-weight: 600;
+.feature-description p {
+  color: #ffffff;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
 }
 
 .modal-body {
-  padding: 30px 40px 40px;
+  padding: 0;
 }
 
-.teacher-details {
-  margin-bottom: 30px;
+.modal-description {
+  padding: 25px 30px 30px;
 }
 
-.detail-section {
-  margin-bottom: 25px;
-}
-
-.detail-section h4 {
-  color: var(--primary-color);
-  font-size: 1.1rem;
+.modal-description h4 {
+  font-family: var(--font-futuristic);
+  font-size: 1.3rem;
   font-weight: 600;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  color: #00d4ff;
+  margin-bottom: 15px;
 }
 
-.detail-section p {
-  color: var(--text-secondary);
+.modal-description p {
+  color: #ffffff;
   line-height: 1.6;
   font-size: 0.95rem;
+  margin-bottom: 20px;
 }
 
 .teacher-joke {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(139, 92, 246, 0.1));
-  border-radius: 20px;
-  padding: 25px;
-  text-align: center;
-  border: 1px solid rgba(0, 212, 255, 0.2);
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid #00d4ff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
 }
 
-.joke-icon {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
-}
-
-.teacher-joke h4 {
-  color: var(--primary-color);
-  font-size: 1.2rem;
+.teacher-joke h5 {
+  color: #00d4ff;
+  font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-.joke-text {
-  color: var(--text-primary);
-  font-size: 1rem;
-  line-height: 1.6;
+.teacher-joke p {
+  color: #ffffff;
+  font-size: 0.9rem;
+  line-height: 1.5;
   font-style: italic;
+  margin: 0;
 }
 
 /* Responsividade */
@@ -631,6 +739,8 @@ export default {
     padding: 20px;
   }
 }
+
+/* Responsividade para tablets - removida duplicação */
 
 @media (max-width: 480px) {
   .teachers-section {
@@ -740,17 +850,38 @@ export default {
     font-size: 1rem;
   }
   
+  .modal-content {
+    max-width: 100%;
+    width: 100%;
+    max-height: 95vh;
+    margin: 5px;
+    border-radius: 12px;
+    overflow-y: auto;
+  }
+  
   .modal-photo {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
   }
   
   .modal-name {
     font-size: 1.2rem;
   }
   
-  .modal-subject {
+  .modal-subtitle {
     font-size: 0.9rem;
+  }
+  
+  .modal-title-section {
+    padding: 10px 10px 8px;
+  }
+  
+  .modal-section {
+    padding: 10px 10px;
+  }
+  
+  .modal-description {
+    padding: 10px 10px 15px;
   }
 }
 
@@ -811,6 +942,9 @@ export default {
   
   .modal-content {
     max-height: 95vh;
+    max-width: 90%;
+    width: 90%;
+    margin: 10px;
   }
   
   .modal-header {

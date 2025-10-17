@@ -12,9 +12,6 @@
     <!-- Professores Hoje e Amanhã -->
     <TeachersSection />
     
-    <!-- Infraestrutura Futurista -->
-    <InfrastructureSection />
-    
     <!-- Refeitório Ana Maria IA -->
     <CafeteriaSection />
     
@@ -44,7 +41,6 @@ import HeroSection from './components/HeroSection.vue'
 import ComparisonSection from './components/ComparisonSection.vue'
 import JarvasSection from './components/JarvasSection.vue'
 import TeachersSection from './components/TeachersSection.vue'
-import InfrastructureSection from './components/InfrastructureSection.vue'
 import CafeteriaSection from './components/CafeteriaSection.vue'
 import ContactSection from './components/ContactSection.vue'
 
@@ -55,7 +51,6 @@ export default {
     ComparisonSection,
     JarvasSection,
     TeachersSection,
-    InfrastructureSection,
     CafeteriaSection,
     ContactSection
   },

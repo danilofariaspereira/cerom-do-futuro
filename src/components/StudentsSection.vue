@@ -123,14 +123,10 @@
         <div class="modal-content" @click.stop>
           <button class="modal-close" @click="closeModal">×</button>
           
-          <div class="modal-header">
-            <div class="modal-student-photo">
-              <img :src="selectedStudent.currentPhoto" :alt="selectedStudent.name" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
-            </div>
-            <div class="modal-student-info">
-              <h3 class="modal-title">{{ selectedStudent.name }}</h3>
-              <p class="modal-grade">{{ selectedStudent.grade }} • {{ selectedStudent.age }} anos</p>
-            </div>
+          <!-- Título do Modal -->
+          <div class="modal-title-section">
+            <h3 class="modal-title">{{ selectedStudent.name }}</h3>
+            <p class="modal-subtitle">{{ selectedStudent.grade }} • {{ selectedStudent.age }} anos</p>
           </div>
           
           <div class="modal-body">
@@ -576,30 +572,31 @@ export default {
   letter-spacing: 1px;
 }
 
-/* Modal */
+/* Modal - Tema Escuro */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(15px);
 }
 
 .modal-content {
-  background: var(--card-bg);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   border-radius: 20px;
-  padding: 30px;
-  max-width: 600px;
+  padding: 0;
+  max-width: 700px;
   width: 90%;
-  max-height: 80vh;
+  max-height: 90vh;
   overflow-y: auto;
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border: 2px solid #00d4ff;
+  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
   position: relative;
 }
 
@@ -607,62 +604,66 @@ export default {
   position: absolute;
   top: 15px;
   right: 20px;
-  background: none;
+  background: transparent;
   border: none;
-  color: var(--text-secondary);
+  color: #00d4ff;
   font-size: 2rem;
   cursor: pointer;
   transition: var(--transition-smooth);
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-close:hover {
-  color: var(--primary-blue);
+  color: #ffffff;
+  transform: rotate(90deg);
 }
 
-.modal-header {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 25px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.modal-student-photo img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--primary-blue);
+.modal-title-section {
+  padding: 30px 30px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.3);
 }
 
 .modal-title {
   font-family: var(--font-futuristic);
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 5px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
 }
 
-.modal-grade {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
+.modal-subtitle {
+  color: #00d4ff;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.modal-body {
+  padding: 0;
 }
 
 .modal-section {
-  margin-bottom: 25px;
+  padding: 25px 30px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
 }
 
 .modal-section h4 {
   font-family: var(--font-futuristic);
-  font-size: 1.1rem;
-  color: var(--primary-blue);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #00d4ff;
   margin-bottom: 15px;
 }
 
 .modal-section p {
-  color: var(--text-secondary);
+  color: #ffffff;
   line-height: 1.6;
+  font-size: 0.95rem;
 }
 
 .skills-grid {
@@ -675,30 +676,35 @@ export default {
   grid-template-columns: 1fr 2fr auto;
   gap: 15px;
   align-items: center;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid #00d4ff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
 }
 
 .skill-name {
   font-weight: 500;
-  color: var(--text-primary);
+  color: #ffffff;
 }
 
 .skill-bar {
   height: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 212, 255, 0.3);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .skill-progress {
   height: 100%;
-  background: var(--gradient-primary);
+  background: linear-gradient(90deg, #00d4ff, #6b7bff);
   border-radius: 4px;
   transition: width 1s ease-out;
 }
 
 .skill-percentage {
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: #00d4ff;
   font-weight: 600;
 }
 
@@ -709,11 +715,11 @@ export default {
 
 .projects-list li {
   background: rgba(0, 212, 255, 0.1);
+  border: 1px solid #00d4ff;
   border-radius: 10px;
-  padding: 10px 15px;
-  margin-bottom: 8px;
-  color: var(--text-secondary);
-  border-left: 3px solid var(--primary-blue);
+  padding: 15px;
+  margin-bottom: 10px;
+  color: #ffffff;
 }
 
 /* Animações */
@@ -737,6 +743,23 @@ export default {
     grid-template-columns: repeat(2, 1fr);
   }
   
+  .modal-content {
+    max-width: 95%;
+    width: 95%;
+    max-height: 95vh;
+    margin: 15px;
+    border-radius: 20px;
+    overflow-y: auto;
+  }
+  
+  .modal-title-section {
+    padding: 20px 20px 15px;
+  }
+  
+  .modal-section {
+    padding: 20px 20px;
+  }
+  
   .modal-header {
     flex-direction: column;
     text-align: center;
@@ -751,6 +774,23 @@ export default {
 @media (max-width: 480px) {
   .stats-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .modal-content {
+    max-width: 98%;
+    width: 98%;
+    max-height: 95vh;
+    margin: 8px;
+    border-radius: 15px;
+    overflow-y: auto;
+  }
+  
+  .modal-title-section {
+    padding: 15px 15px 10px;
+  }
+  
+  .modal-section {
+    padding: 15px 15px;
   }
   
   .stat-number {
