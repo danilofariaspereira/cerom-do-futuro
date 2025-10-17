@@ -39,10 +39,6 @@
             Uma jornada interativa através do tempo, mostrando nossa evolução e visão para os próximos 50 anos.
           </p>
           
-          <!-- Créditos -->
-          <p class="hero-credits">
-            Criado por Danilo Farias Pereira
-          </p>
           
           <!-- Botão de ação -->
           <div class="hero-actions">
@@ -211,13 +207,6 @@ export default {
   }
 }
 
-.hero-credits {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  margin-bottom: 30px;
-  font-style: italic;
-  opacity: 0.8;
-}
 
 .hero-title {
   font-family: var(--font-futuristic);
@@ -515,10 +504,6 @@ export default {
     line-height: 1.6;
   }
   
-  .hero-credits {
-    font-size: 0.8rem;
-    margin-bottom: 25px;
-  }
   
   .btn-explore {
     font-size: 1rem;
