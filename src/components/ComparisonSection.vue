@@ -128,7 +128,7 @@ export default {
           title: 'Sala de Aula',
           description: 'O ambiente de aprendizado está sendo transformado',
           currentImage: '/images/sala-hoje.jpeg',
-          futureImage: '/images/sala-do-futuro.jpeg',
+          futureImage: '/images/sala-futuro.jpeg',
           currentFeatures: 'Quadro tradicional, carteiras fixas, livros físicos',
           futureFeatures: 'Realidade aumentada, mesas interativas, IA personalizada',
           detailedDescription: 'Nossa sala de aula tradicional está evoluindo para um espaço completamente interativo, onde os alunos podem aprender através de realidade aumentada, mesas inteligentes que respondem ao toque e sistemas de IA que adaptam o conteúdo às necessidades individuais de cada estudante.'
